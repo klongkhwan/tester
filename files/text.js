@@ -52,7 +52,6 @@ function toggleCopyButton() {
     copyButton.disabled = textArea.value.trim() === "";
 }
 
-// Generates random text based on selected character types
 function generateRandom(charCount) {
     const thaiChars = 'กขคงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮ';
     const englishChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -83,9 +82,16 @@ function generateRandom(charCount) {
         const randomIndex = Math.floor(Math.random() * allowedChars.length);
         result += allowedChars[randomIndex];
     }
+    updateCounts();
+
+    // Use setTimeout to ensure the UI updates before calling toggleCopyButton
+    setTimeout(() => {
+        toggleCopyButton();
+    }, 0);
 
     return result;
 }
+
 
 // Copies text from JSON data to the textarea and updates the UI
 function copyJsonData(key) {
