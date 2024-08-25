@@ -86,7 +86,7 @@
                 
                 <h1>สุ่มเลขบัตรประชาชน</h1>
                 <button id="generateBtn">Random</button>
-                <div id="result"></div>
+                <div id="resultcard"></div>
                 <div id="copyMessage"></div>
 
                 <h1>สุ่มเบอร์โทรศัพท์</h1>
@@ -147,18 +147,30 @@
                 <script src="files/text.js"></script>
             </div>
             <div id="convert" class="tab-content">
-                <div class="container">
+                <h1>แปลงค่า</h1>                
                     <div class="input-wrapper">
-                        <h1>แปลงวันและเวลา</h1>
+                        <h3>แปลงวันและเวลา</h3>
                         <button class="calendar-button" id="calendarButton" type="button">📅</button>
                         <input class="clear-input" type="number" id="timeInput" placeholder="กรุณากรอกข้อมูล"  maxlength="14">
                         <button class="clear-input-button" id="clearvalue" type="clearButton">×</button>
+                        <p id="resultconvertdate"></p>
+                        <input type="hidden" id="hiddenDateInput">
                     </div>
+                    <div class="cookie">
+                        <h3>JSON To Cookie</h3>
+                        <a href="https://chromewebstore.google.com/detail/copy-cookies/jcbpglbplpblnagieibnemmkiamekcdg?hl=en" target="_blank" class="link">
+                            <button>Cookie Extension</button>
+                        </a>
+                        <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
+                        <input type="text" id="accessToken" readonly placeholder="Access Token will appear here...">
+                        <button id="pasteButton" onclick="pasteAndProcess()">Paste JSON</button>
+                    </div>
+                    <div class="message" id="copyMessagecookie"></div>
                 
-                    <p id="resultconvertdate"></p>
-                    <input type="hidden" id="hiddenDateInput">
-                </div>
+                    
+                
                 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+            <script src="files/convert.js"></script>    
             </div>
             <div id="soon" class="tab-content">
                 <h1>soon</h1>
