@@ -52,6 +52,7 @@ function toggleCopyButton() {
     copyButton.disabled = textArea.value.trim() === "";
 }
 
+// Toggles the generateRandom
 function generateRandom(charCount) {
     const thaiChars = 'กขคงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮ';
     const englishChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
