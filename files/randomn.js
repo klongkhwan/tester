@@ -124,10 +124,10 @@ function generatePhoneNumber() {
     // กำหนดหลักที่สองให้สุ่มจาก 8 ถึง 9
     const secondDigit = Math.floor(Math.random() * 2) + 8;
 
-    // สุ่มหลักที่เหลือเป็น 0 ถึง 9
-    const remainingDigits = Math.floor(Math.random() * 1000000000).toString().padStart(9, '0');
+    // สุ่มหลักที่เหลือเป็น 0 ถึง 9 จำนวน 8 หลัก
+    const remainingDigits = Math.floor(Math.random() * 100000000).toString().padStart(8, '0');
 
-    // รวมหมายเลขโทรศัพท์
+    // รวมหมายเลขโทรศัพท์ให้มีทั้งหมด 10 หลัก
     const phoneNumber = '0' + secondDigit + remainingDigits;
 
     // แสดงหมายเลขโทรศัพท์ในหน้าเว็บ
