@@ -12,7 +12,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: url(bg.jpg);
+    background: url(/css/bg.jpg);
     background-size: cover;
     margin: 0;
     padding: 0;
@@ -181,6 +181,11 @@ button {
 
 button:hover {
     background-color: #54fd2c4d; /* สีพื้นหลังเมื่อชี้เมาส์ไปที่ปุ่ม */
+}
+
+.controlscheckbox {
+    color: var(--text-white);
+    margin-bottom: 5px;
 }
 
 #clearText {
@@ -356,7 +361,13 @@ label {
     transition: background-color 0.3s; /* การเปลี่ยนแปลงสีพื้นหลังเมื่อเคลื่อนที่เหนือปุ่ม */
 }
 
-
+#generateButton:disabled{
+    padding: 2px 12px;
+    background-color: #cccccc;
+    color: #00000065;
+    cursor: not-allowed;
+    
+}
 
 
 
