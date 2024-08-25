@@ -231,7 +231,7 @@ button:hover {
 }
 
 
-#result, #resultname, #resultphone,#resultconvertdate {
+#resultcard, #resultname, #resultphone,#resultconvertdate,#resultcookie {
     margin-top: 15px;
     font-size: 1.2em;
     color: #B2B3BD;
@@ -244,6 +244,20 @@ button:hover {
     display: none; /* ซ่อนข้อความเริ่มต้น */
     font-weight: bold;
 }
+
+.message {
+    margin-top: 10px;
+    font-size: 0.7em;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
 
 #buttoncopyfixtext {
     background-color: #3dff121d; /* สีพื้นหลังของปุ่ม */
@@ -374,7 +388,8 @@ label {
 textarea {
     background-color: #000000; /* เพิ่มพื้นหลังสีเทาอ่อน */
     color: var(--text-white);
-    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
     font: 1em sans-serif;
     width: 100%;
     height: 150px;
