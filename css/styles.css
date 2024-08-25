@@ -1,0 +1,406 @@
+:root {
+    --primary-color: #5BFF2E; 
+    --secondary-color: #5BFF2E; 
+    --text-black: #000; 	 	
+    --text-white: #ffffff; 
+    --second-text-color: #B2B3BD;
+    --button-bg-color: #3dff121d; 
+    --button-text-color: #67fe43f5; 
+    --button-hover-color:: #54fd2c4d; 
+  }
+
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: url(/files/bg.jpg);
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: #333;
+    padding: 10px;
+    height: 40px;
+    display: flex;
+    justify-content: center; /* จัดกึ่งกลางตามแนวนอน */
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* ใช้ flexbox กับ ul เพื่อให้ li เรียงตามแนวนอน */
+}
+
+ul li {
+    position: relative;
+    margin-right: 10px; /* กำหนดระยะห่างระหว่างเมนู */
+}
+
+ul li:last-child {
+    margin-right: 0; /* ลบระยะห่างในรายการสุดท้าย */
+}
+
+ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+ul li a:hover {
+
+    border-bottom: 3px solid var(--primary-color)
+}
+
+ul li ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #333;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+ul li:hover ul {
+    display: block;
+}
+
+ul li ul li {
+    display: block;
+    width: 150px;
+}
+
+ul li ul li a {
+    padding: 10px;
+}
+
+.tab-container {
+    width: 100%;
+}
+
+.tabs {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.tab-link {
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #ffffff;
+    margin-right: 5px;
+    border-radius: 5px 5px 0 0;
+    font-family: 'Kanit-Bold', sans-serif;
+}
+
+.tab-link.active {
+    background-color: #5BFF2E;
+    color: #000;
+    border-bottom: none;
+}
+
+.tab-content {
+    display: none;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.tab-content.active {
+    display: block;
+}
+
+
+section {
+    display: none;
+    padding: 20px;
+    border-radius: 20px; /* กำหนดมุมโค้ง */
+    margin: 20px;
+    
+}
+
+section h1 {
+    color: #ffffff;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+section p {
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Show home section by default */
+#home {
+    display: block;
+}
+
+section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.2);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 1.5em;
+    color: #333;
+    margin-top: 2px;
+}
+
+h3 {
+    color: #ffffff;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+button {
+    background-color: #3dff121d; /* สีพื้นหลังของปุ่ม */
+    border: none; /* ไม่มีขอบ */
+    color: #67fe43f5; /* สีของตัวอักษร */
+    padding: 10px 20px; /* ขนาดของปุ่ม */
+    text-align: center; /* จัดตำแหน่งตัวอักษร */
+    text-decoration: none; /* ไม่มีขีดเส้นใต้ */
+    display: inline-block; /* ให้ปุ่มเป็นบล็อกในแถวเดียวกัน */
+    font-size: 16px; /* ขนาดตัวอักษร */
+    cursor: pointer; /* แสดงเคอร์เซอร์เป็นมือชี้เมื่อชี้ไปที่ปุ่ม */
+    border-radius: 4px; /* มุมโค้งมนของปุ่ม */
+    transition: background-color 0.3s; /* การเปลี่ยนแปลงสีพื้นหลังแบบค่อยเป็นค่อยไป */
+}
+
+button:hover {
+    background-color: #54fd2c4d; /* สีพื้นหลังเมื่อชี้เมาส์ไปที่ปุ่ม */
+}
+
+#clearText {
+    padding: 2px 12px;
+    background-color: #da1010cb; /* สีพื้นหลัง */
+    color: var(--text-white);
+}
+
+#clearvalue {
+    padding: 10px 12px;
+    background-color: #da1010cb; /* สีพื้นหลัง */
+    color: var(--text-white);
+}
+
+.calendar-button {
+    padding: 11px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.calendar-button:hover {
+    background-color: #e0e0e0;
+}
+
+#hiddenDateInput {
+    display: none;
+}
+
+
+
+#clearText:disabled, #copyButton:disabled {
+    padding: 2px 12px;
+    background-color: #cccccc;
+    color: #00000065;
+    cursor: not-allowed;
+    
+}
+/* CSS เฉพาะสำหรับปุ่มที่มี id="copyButton" */
+#copyButton {
+    padding: 2px 12px;
+    background-color: var(--button-bg-color);
+}
+
+
+#result, #resultname, #resultphone,#resultconvertdate {
+    margin-top: 15px;
+    font-size: 1.2em;
+    color: #B2B3BD;
+}
+
+#copyMessage, #copyMessagename, #copyMessagephone {
+    margin-top: 5px;
+    color: green;
+    font-size: 0.7em;
+    display: none; /* ซ่อนข้อความเริ่มต้น */
+    font-weight: bold;
+}
+
+#buttoncopyfixtext {
+    background-color: #3dff121d; /* สีพื้นหลังของปุ่ม */
+    border: none; /* ไม่มีขอบ */
+    color: #67fe43f5; /* สีของตัวอักษร */
+    padding: 10px 10px; /* ขนาดของปุ่ม */
+    text-align: center; /* จัดตำแหน่งตัวอักษร */
+    text-decoration: none; /* ไม่มีขีดเส้นใต้ */
+    display: inline-block; /* ให้ปุ่มเป็นบล็อกในแถวเดียวกัน */
+    font-size: 12px; /* ขนาดตัวอักษร */
+    cursor: pointer; /* แสดงเคอร์เซอร์เป็นมือชี้เมื่อชี้ไปที่ปุ่ม */
+    border-radius: 4px; /* มุมโค้งมนของปุ่ม */
+    transition: background-color 0.3s; /* การเปลี่ยนแปลงสีพื้นหลังแบบค่อยเป็นค่อยไป */
+}
+
+#buttoncopyfixtext:hover {
+    background-color: #54fd2c4d; /* สีพื้นหลังเมื่อชี้เมาส์ไปที่ปุ่ม */
+}
+
+
+
+.input-wrapper {
+    position: relative; /* For absolute positioning of the calendar */
+    display: inline-block; /* Container to center the input and button */
+}
+
+.clear-input {
+    padding: 8px;
+    font-size: 16px;
+}
+
+.clear-input-button, .calendar-button {
+    padding: 6.6px 10px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.clear-input-button:hover, .calendar-button:hover {
+    background-color: #e0e0e0;
+}
+
+/* Compact calendar style */
+.flatpickr-calendar {
+    font-size: 12px; /* Adjust font size */
+    width: 250px; /* Set calendar width */
+    margin: 0 auto; /* Center the calendar */
+}
+
+.flatpickr-months, .flatpickr-weekdays, .flatpickr-days {
+    font-size: 12px; /* Adjust font size */
+}
+
+.flatpickr-day {
+    width: 24px; /* Adjust day width */
+    height: 24px; /* Adjust day height */
+    line-height: 24px; /* Center text vertically */
+}
+
+.flatpickr-day:hover {
+    background-color: #ddd; /* Hover effect */
+}
+input[type="text"] {
+    /* Background color */
+    background-color: #f0f0f0; /* Light grey background */
+
+    /* Border */
+    border: 2px solid #4a90e2; /* Blue border */
+    border-radius: 4px; /* Rounded corners */
+
+    /* Text color */
+    color: #333333; /* Dark grey text color */
+
+    /* Padding and font size */
+    padding: 8px 12px; /* Padding inside the input */
+    font-size: 16px; /* Font size */
+    
+    /* Width */
+    
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Apply styles to the clear button */
+button#clearButton {
+    right: 10px; /* Position the button inside the input field */
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Optional: Add a hover effect for the clear button */
+button#clearButton:hover {
+    color: #d0021b; /* Red color on hover */
+}
+
+.radio-group {
+    margin: 10px 0;
+}
+
+label {
+    font-size: 1.1em;
+    margin-right: 15px;
+    color: var(--second-text-color);
+}
+
+#generateButton {
+    font-size: 16px; /* ขนาดตัวอักษรของปุ่ม */
+    padding: 2px 12px;
+    background-color: var(--button-bg-color);
+    border: none; /* ไม่มีขอบ */
+    border-radius: 5px; /* มุมป-rounded */
+    cursor: pointer; /* แสดงตัวชี้เป็นมือเมื่ออยู่เหนือปุ่ม */
+    transition: background-color 0.3s; /* การเปลี่ยนแปลงสีพื้นหลังเมื่อเคลื่อนที่เหนือปุ่ม */
+}
+
+
+
+
+
+textarea {
+    background-color: #000000; /* เพิ่มพื้นหลังสีเทาอ่อน */
+    color: var(--text-white);
+    margin-top: 20px;
+    font: 1em sans-serif;
+    width: 100%;
+    height: 150px;
+    resize: none;
+}
+.resultstextarea {
+    margin-top: 20px;
+}
+
+.results {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px; /* ปรับระยะห่างให้แคบลง */
+    padding: 10px;
+}
+.results p {
+    margin: 0;
+    color: var(--primary-color); /* สีของตัวอักษร */
+    background-color: #000000; /* เพิ่มพื้นหลังสีเทาอ่อน */
+    padding: 5px 10px;
+    border: 1px;
+    border-color: #5BFF2E;
+    border-radius: 5px; /* เพิ่มการโค้งมนที่ขอบ */
+}
+
+#charCountInput {
+    width: 50px; /* กำหนดความกว้าง */
+    height: 10px; /* กำหนดความสูง */
+    padding: 5px; /* เพิ่ม padding */
+    font-size: 16px; /* ขนาดฟอนต์ */
+    border: 1px solid #cccccc77; /* สีขอบ */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* เงาขอบ */
+}
+
+/* ปรับสีพื้นหลังและสีอักษร */
+#charCountInput {
+    background-color: #000000; /* สีพื้นหลัง */
+    color:var(--primary-color);
+}

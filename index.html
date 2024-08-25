@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>My Personal Website</title>
+    <link rel="stylesheet" href="css/styles.css">
+  
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('home')">Home</a></li>
+            <li><a href="#" onclick="showSection('menu1')">Knogwlage</a></li>
+            <li><a href="#" onclick="showSection('menu2')">Tools</a></li>            
+            <li><a href="#" onclick="showSection('about')">About</a></li>
+        </ul>
+    </nav>
+
+    <section id="home">
+        <h1>Home Page</h1>
+        <p>This is the home page content.</p>
+    </section>
+
+    <section id="menu1">                
+        <div class="tab-container">
+            <ul class="tabs">
+                <li class="tab-link active" data-tab="allknow">ข้อมูลทั่วไป</li>
+                <li class="tab-link" data-tab="tester">Tester</li>
+                <li class="tab-link" data-tab="postman">Postman</li>
+                <li class="tab-link" data-tab="sql">SQL</li>
+            </ul>
+        
+            <div id="allknow" class="tab-content active">
+                <h1>ข้อมูลทั่วไป</h1>
+                
+            </div>
+        
+            <div id="tester" class="tab-content">
+                <h1>Tester</h1>
+               
+            </div>
+            <div id="postman" class="tab-content">
+                <h1>Postman</h1>
+                <p>2024-08-09 08:09:31.576+00</p>
+            </div>
+            <div id="sql" class="tab-content">
+                <h1>SQL</h1>
+            </div>
+        </div>
+        <script src="files/scripts.js"></script>
+        
+    </section>
+
+    <section id="menu2">
+        <div class="tab-container">
+            <ul class="tabs">
+                <li class="tab-link active" data-tab="random">สุ่มทุกอย่าง</li>
+                <li class="tab-link" data-tab="Count">นับตัวอักษร</li>
+                <li class="tab-link" data-tab="convert">แปลงค่า</li>
+                <li class="tab-link" data-tab="soon">เพิ่มเติม</li>
+            </ul>
+        
+            <div id="random" class="tab-content active">
+                <h1>สุ่มชื่อและนามสกุล</h1>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="language" value="thai" checked>
+                        สุ่มชื่อภาษาไทย
+                    </label>
+                </div>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="language" value="english">
+                        สุ่มชื่อภาษาอังกฤษ
+                    </label>
+                </div>
+                <button onclick="generateName()">Random</button>
+                <div id="resultname"></div>
+                <div id="copyMessagename"></div>
+                
+                <h1>สุ่มเลขบัตรประชาชน</h1>
+                <button id="generateBtn">Random</button>
+                <div id="result"></div>
+                <div id="copyMessage"></div>
+
+                <h1>สุ่มเบอร์โทรศัพท์</h1>
+                <button onclick="generatePhoneNumber()">Random</button>
+                <div id="resultphone" ></div>
+                <div id="copyMessagephone"></div>
+
+                <script src="files/randomn.js"></script>
+            </div>
+        
+            <div id="Count" class="tab-content">
+                <h1>นับตัวอักษร</h1>
+                <div class="controls">
+                    <label for="charCountInput">จำนวนตัวอักษรรวมช่องว่างที่ต้องการสุ่ม:</label>
+                    <input type="number" id="charCountInput" min="1" value="20">
+                    <button id="generateButton" onclick="generateRandomText()" >สุ่ม</button>
+                    <button id="copyButton" onclick="copyTextarea()" disabled>คัดลอก</button>
+                    <button id="clearText" onclick="clearTextarea()">ล้าง</button>
+                </div>
+                <textarea id="textArea" placeholder="กรุณาใส่ข้อความที่นี่..." oninput="toggleCopyButton()"></textarea>
+
+                <div class="results">
+                <p><strong>จำนวนตัวอักษร:</strong> <span id="charCount">-</span> </p>
+                <p><strong>จำนวนช่องว่าง:</strong> <span id="spaceCount">-</span></p>
+                <p><strong>รวมทั้งหมด:</strong> <span id="totalCount">-</span></p>
+                </div>
+                <h3>คัดลอกข้อความตามจำนวน</h3>
+                <div class="controls">
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="10"></i> 10 <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="50"></i> 50 <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="100"></i> 100 <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="255"></i> 255 <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key=">10"></i> >10 <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key=">50"></i> >50 <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key=">100"></i> >100 <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key=">255"></i> >255 <i class="fas fa-copy"></i></button>
+                </div>
+                <h3>คัดลอกข้อความตามรูปแบบ</h3>
+                <div class="controls">
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="th"></i> TH <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="en"></i> EN <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="number"></i> Number <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="special"></i> Special <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="numberTHEN"></i> Number+TH/EN <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="specialTHEN"></i> Special+TH/EN <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="space"></i> Space <i class="fas fa-copy"></i></button>
+                </div>
+
+                <div class="message" id="copyMessage"></div>
+                <script src="files/text.js"></script>
+            </div>
+            <div id="convert" class="tab-content">
+                <div class="container">
+                    <div class="input-wrapper">
+                        <h1>แปลงวันและเวลา</h1>
+                        <button class="calendar-button" id="calendarButton" type="button">📅</button>
+                        <input class="clear-input" type="number" id="timeInput" placeholder="กรุณากรอกข้อมูล"  maxlength="14">
+                        <button class="clear-input-button" id="clearvalue" type="clearButton">×</button>
+                    </div>
+                
+                    <p id="resultconvertdate"></p>
+                    <input type="hidden" id="hiddenDateInput">
+                </div>
+                <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+            </div>
+            <div id="soon" class="tab-content">
+                <h1>soon</h1>
+            </div>
+        </div>
+        <script src="files/scripts.js"></script>
+    </section>
+
+    <section id="convert">
+        
+    </section>
+
+    <section id="about">
+        <h1>About</h1>
+        <p>This is the about page content.</p>
+    </section>
+
+    <script>
+        function showSection(id) {
+            var sections = document.querySelectorAll('section');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+            document.getElementById(id).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
