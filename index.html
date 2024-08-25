@@ -7,7 +7,7 @@
     
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>My Personal Website</title>
+    <title>My Website</title>
     <link rel="stylesheet" href="css/styles.css">
   
 </head>
@@ -99,13 +99,21 @@
         
             <div id="Count" class="tab-content">
                 <h1>นับตัวอักษร</h1>
+                <div class="controlscheckbox">
+                    <label><input type="checkbox" id="th" checked> ไทย</label>
+                    <label><input type="checkbox" id="en"> อังกฤษ</label>
+                    <label><input type="checkbox" id="number"> ตัวเลข</label>
+                    <label><input type="checkbox" id="special"> ตัวอักษรพิเศษ</label>
+                    <label><input type="checkbox" id="space"> ช่องว่าง</label>
+                </div>
                 <div class="controls">
                     <label for="charCountInput">จำนวนตัวอักษรรวมช่องว่างที่ต้องการสุ่ม:</label>
-                    <input type="number" id="charCountInput" min="1" value="20">
-                    <button id="generateButton" onclick="generateRandomText()" >สุ่ม</button>
+                    <input type="number" id="charCountInput" min="1" value="20" oninput="setDefaultValue(event)">
+                    <button id="generateButton" onclick="generateRandom()" >สุ่ม</button>
                     <button id="copyButton" onclick="copyTextarea()" disabled>คัดลอก</button>
                     <button id="clearText" onclick="clearTextarea()">ล้าง</button>
                 </div>
+
                 <textarea id="textArea" placeholder="กรุณาใส่ข้อความที่นี่..." oninput="toggleCopyButton()"></textarea>
 
                 <div class="results">
