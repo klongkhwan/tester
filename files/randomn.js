@@ -28,7 +28,7 @@ function copyToClipboard(text) {
 
 document.getElementById('generateBtn').addEventListener('click', function() {
     let randomID = generateRandomID();
-    document.getElementById('result').innerText = randomID;
+    document.getElementById('resultcard').innerText = randomID;
     copyToClipboard(randomID);
 
     // ซ่อนข้อความคัดลอกของชื่อและแสดงข้อความคัดลอกของเลขบัตร
