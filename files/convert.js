@@ -114,3 +114,37 @@ function showAccessToken() {
         copyMessagecookie.className = 'message error'; // Show error message
     }
 }
+
+function base64UrlDecode(input) {
+    let base64 = input.replace(/-/g, '+').replace(/_/g, '/');
+    return decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+}
+
+function convertJWT() {
+    const jwt = document.getElementById('jwtInput').value;
+    const parts = jwt.split('.');
+
+    if (parts.length !== 3) {
+        document.getElementById('jsonOutput').value = "Invalid JWT";
+        return;
+    }
+
+    try {
+        const header = base64UrlDecode(parts[0]);
+        const payload = base64UrlDecode(parts[1]);
+
+        const jsonOutput = {
+            header: JSON.parse(header),
+            payload: JSON.parse(payload),
+            signature: parts[2]
+        };
+
+        document.getElementById('jsonOutput').value = JSON.stringify(jsonOutput, null, 2);
+    } catch (e) {
+        document.getElementById('jsonOutput').value = "Error decoding JWT";
+    }
+}
+
+document.getElementById('jwtInput').addEventListener('input', convertJWT);
