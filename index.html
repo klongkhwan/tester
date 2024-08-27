@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     
-
+    <script src="files/scripts.js"></script>  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>My Website</title>
     <link rel="stylesheet" href="css/styles.css">
@@ -21,7 +21,7 @@
             <li><a href="#" onclick="showSection('about')">About</a></li>
         </ul>
     </nav>
-    
+    <div class="spinner" id="spinner"></div>
     <section id="home">
         <h1>Home Page</h1>
         <p>This is the home page content.</p>
@@ -166,7 +166,11 @@
                         <button id="pasteButton" onclick="pasteAndProcess()">Paste JSON</button>
                     </div>
                     <div class="message" id="copyMessagecookie"></div>
-                
+                    <div class="cookie">
+                        <h3>JWT To JSON</h3>
+                        <textarea id="jwtInput" placeholder="Paste your JWT here..."></textarea>
+                        <textarea id="jsonOutput" placeholder="Converted JSON will appear here..." readonly></textarea>
+                    </div>
                     
                 
                 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -188,14 +192,6 @@
         <p>This is the about page content.</p>
     </section>
 
-    <script>
-        function showSection(id) {
-            var sections = document.querySelectorAll('section');
-            sections.forEach(function(section) {
-                section.style.display = 'none';
-            });
-            document.getElementById(id).style.display = 'block';
-        }
-    </script>
+
 </body>
 </html>
