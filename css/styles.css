@@ -117,12 +117,18 @@ ul li ul li a {
 }
 
 
+
+
+
 section {
     display: none;
-    padding: 20px;
-    border-radius: 20px; /* กำหนดมุมโค้ง */
-    margin: 20px;
-    
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.2);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 section h1 {
@@ -142,15 +148,6 @@ section p {
     display: block;
 }
 
-section {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 30px;
-    background: rgba(0, 0, 0, 0.2);
-    -webkit-backdrop-filter: blur(3px);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
 
 h1 {
     color: #ffffff;
@@ -429,4 +426,30 @@ textarea {
 #charCountInput {
     background-color: #000000; /* สีพื้นหลัง */
     color:var(--primary-color);
+}
+
+.spinner {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: radial-gradient(farthest-side,#5bff2e 94%,#0000) top/9px 9px no-repeat,
+               conic-gradient(#0000 30%,#5bff2e);
+    -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 0);
+    animation: spinner-c7wet2 1s infinite linear;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    display: none; /* Hidden by default */
+    z-index: 9999; /* Make sure it appears above other content */
+}
+
+@keyframes spinner-c7wet2 {
+    100% {
+        transform: rotate(1turn);
+    }
+}
+
+section {
+    display: none; /* Hide all sections initially */
 }
