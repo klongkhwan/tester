@@ -18,6 +18,12 @@ document.querySelectorAll('.tab-link').forEach(function(tab) {
 function showSection(id) {
     var sections = document.querySelectorAll('section');
     var spinner = document.getElementById('spinner');
+    var links = document.querySelectorAll('.tab-link');
+
+    // ปิดการทำงานของลิงก์เมนู
+    links.forEach(function(link) {
+        link.style.pointerEvents = 'none';
+    });
 
     // แสดง spinner
     spinner.style.display = 'block';
@@ -31,6 +37,11 @@ function showSection(id) {
     setTimeout(function() {
         document.getElementById(id).style.display = 'block';
         spinner.style.display = 'none'; // ซ่อน spinner
+
+        // เปิดการทำงานของลิงก์เมนู
+        links.forEach(function(link) {
+            link.style.pointerEvents = 'auto';
+        });
     }, 1000); // ปรับเวลาให้เหมาะสมตามความต้องการ
 }
 
@@ -38,6 +49,11 @@ function showTab(tabId) {
     var tabs = document.querySelectorAll('.tab-content');
     var links = document.querySelectorAll('.tab-link');
     var spinner = document.getElementById('spinner');
+
+    // ปิดการทำงานของลิงก์เมนู
+    links.forEach(function(link) {
+        link.style.pointerEvents = 'none';
+    });
 
     // Show spinner
     spinner.style.display = 'block';
@@ -57,6 +73,11 @@ function showTab(tabId) {
         document.getElementById(tabId).style.display = 'block';
         document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
         spinner.style.display = 'none'; // Hide spinner
+
+        // เปิดการทำงานของลิงก์เมนู
+        links.forEach(function(link) {
+            link.style.pointerEvents = 'auto';
+        });
     }, 500); // Adjust delay as needed
 }
 
