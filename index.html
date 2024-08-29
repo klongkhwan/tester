@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>My Website</title>
     <link rel="stylesheet" href="css/styles.css">
+    
   
 </head>
 <body>
-
+    
     <nav>
         <ul>
             <li><a href="#" onclick="showSection('home')">Home</a></li>
@@ -147,7 +148,13 @@
                 <script src="files/text.js"></script>
             </div>
             <div id="convert" class="tab-content">
-                <h1>แปลงค่า</h1>                
+                <h1>แปลงค่า</h1>
+                    <div class="yearconvert">
+                        <h3>คำนวณปี</h3>
+                        <input type="number" id="numberInput" placeholder="เช่น 30">
+                        <button id="yearsum" onclick="calculateYear()">คำนวณ</button>
+                        <p id="resultyear"></p>
+                    </div>            
                     <div class="input-wrapper">
                         <h3>แปลงวันและเวลา</h3>
                         <button class="calendar-button" id="calendarButton" type="button">📅</button>
@@ -156,17 +163,9 @@
                         <p id="resultconvertdate"></p>
                         <input type="hidden" id="hiddenDateInput">
                     </div>
-                    <div class="cookie">
-                        <h3>JSON To Cookie</h3>
-                        <a href="https://chromewebstore.google.com/detail/copy-cookies/jcbpglbplpblnagieibnemmkiamekcdg?hl=en" target="_blank" class="link">
-                            <button>Cookie Extension</button>
-                        </a>
-                        <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
-                        <input type="text" id="accessToken" readonly placeholder="Access Token will appear here...">
-                        <button id="pasteButton" onclick="pasteAndProcess()">Paste JSON</button>
-                    </div>
+        
                     <div class="message" id="copyMessagecookie"></div>
-                    <div class="cookie">
+                    <div class="jwt">
                         <h3>JWT To JSON</h3>
                         <textarea id="jwtInput" placeholder="Paste your JWT here..."></textarea>
                         <textarea id="jsonOutput" placeholder="Converted JSON will appear here..." readonly></textarea>
