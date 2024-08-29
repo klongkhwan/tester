@@ -77,43 +77,24 @@ function pasteAndProcess() {
         });
 }
 
-function showAccessToken() {
-    const copyMessagecookie = document.getElementById('copyMessagecookie');
-    const accessTokenInput = document.getElementById('accessToken');
-    copyMessagecookie.textContent = ''; // Clear previous messages
-
-    try {
-        const data = document.getElementById('jsonInput').value;
-        if (data.trim() === '') {
-            accessTokenInput.value = '';
-            return;
-        }
-        const cookies = JSON.parse(data);
-
-        // Check if the data is an array and has elements
-        if (Array.isArray(cookies) && cookies.length > 0 && cookies[0]['value']) {
-            const accessToken = "accessToken=" + cookies[0]['value'] + ";";
-            accessTokenInput.value = accessToken;
-
-            // Copy the access token to the clipboard
-            navigator.clipboard.writeText(accessToken)
-                .then(() => {
-                    copyMessagecookie.textContent = 'Cookie has been copied.';
-                    copyMessagecookie.className = 'message success'; // Show success message
-                })
-                .catch(err => {
-                    copyMessagecookie.textContent = 'Failed to copy Access Token.';
-                    copyMessagecookie.className = 'message error'; // Show error message
-                });
-        } else {
-            throw new Error('Access Token not found.');
-        }
-    } catch (e) {
-        accessTokenInput.value = '';
-        copyMessagecookie.textContent = 'Error: Invalid JSON format or Access Token not found.';
-        copyMessagecookie.className = 'message error'; // Show error message
+function calculateYear() {
+    const number = parseInt(document.getElementById('numberInput').value);
+    if (isNaN(number)) {
+        document.getElementById('resultyear').textContent = "กรุณากรอกเลขที่ถูกต้อง";
+        return;
     }
+
+    const currentDate = new Date();
+    const currentYearCE = currentDate.getFullYear(); // ปี ค.ศ. ปัจจุบัน
+    const currentYearBE = currentYearCE + 543; // ปี พ.ศ. ปัจจุบัน
+
+    const yearBE = currentYearBE - number;
+    const yearCE = currentYearCE - number;
+
+    document.getElementById('resultyear').textContent = `ปี พ.ศ. = ${yearBE}, ปี ค.ศ. = ${yearCE}`;
 }
+
+document.getElementById('numberInput').addEventListener('input', calculateYear);
 
 function base64UrlDecode(input) {
     let base64 = input.replace(/-/g, '+').replace(/_/g, '/');
