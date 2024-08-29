@@ -11,7 +11,7 @@
 
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Cursive', sans-serif;
     background: url(bg.jpg);
     background-size: cover;
     margin: 0;
@@ -228,7 +228,7 @@ button:hover {
 }
 
 
-#resultcard, #resultname, #resultphone,#resultconvertdate,#resultcookie {
+#resultcard, #resultname, #resultphone,#resultconvertdate,#resultcookie,#resultyear {
     margin-top: 15px;
     font-size: 1.2em;
     color: #B2B3BD;
@@ -362,7 +362,7 @@ label {
     color: var(--second-text-color);
 }
 
-#generateButton {
+#generateButton,#yearsum {
     font-size: 16px; /* ขนาดตัวอักษรของปุ่ม */
     padding: 2px 12px;
     background-color: var(--button-bg-color);
@@ -370,6 +370,12 @@ label {
     border-radius: 5px; /* มุมป-rounded */
     cursor: pointer; /* แสดงตัวชี้เป็นมือเมื่ออยู่เหนือปุ่ม */
     transition: background-color 0.3s; /* การเปลี่ยนแปลงสีพื้นหลังเมื่อเคลื่อนที่เหนือปุ่ม */
+}
+
+#generateButton:hover, #yearsum:hover {
+    background-color: #54fd2c4d; /* สีเมื่อ hover */
+    cursor: pointer; /* เปลี่ยน cursor เป็น pointer */
+    transition: background-color 0.3s ease; /* เพิ่ม transition สำหรับเอฟเฟกต์ที่นุ่มนวล */
 }
 
 #generateButton:disabled{
@@ -413,8 +419,9 @@ textarea {
     border-radius: 5px; /* เพิ่มการโค้งมนที่ขอบ */
 }
 
-#charCountInput {
-    width: 50px; /* กำหนดความกว้าง */
+#charCountInput,#numberInput {
+    text-align: center;
+    width: 80px; /* กำหนดความกว้าง */
     height: 10px; /* กำหนดความสูง */
     padding: 5px; /* เพิ่ม padding */
     font-size: 16px; /* ขนาดฟอนต์ */
@@ -423,7 +430,7 @@ textarea {
 }
 
 /* ปรับสีพื้นหลังและสีอักษร */
-#charCountInput {
+#charCountInput,#numberInput {
     background-color: #000000; /* สีพื้นหลัง */
     color:var(--primary-color);
 }
@@ -453,3 +460,4 @@ textarea {
 section {
     display: none; /* Hide all sections initially */
 }
+
