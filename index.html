@@ -155,21 +155,34 @@
                         <button id="yearsum" onclick="calculateYear()">คำนวณ</button>
                         <p id="resultyear"></p>
                     </div>            
-                    <div class="input-wrapper">
                         <h3>แปลงวันและเวลา</h3>
+                        <label><input type="radio" name="timeFormat" value="format1" checked> รูปแบบ 1</label>
+                        <label><input type="radio" name="timeFormat" value="format2"> รูปแบบ 2 </label>
+                        <label><input type="radio" name="timeFormat" value="format3"> รูปแบบ 3 </label>
+                        <div class="input-wrapper">
                         <button class="calendar-button" id="calendarButton" type="button">📅</button>
-                        <input class="clear-input" type="number" id="timeInput" placeholder="กรุณากรอกข้อมูล"  maxlength="14">
+                        <input class="clear-input" type="text" id="timeInput" placeholder="YYYYMMDDHHMMSS (14 หลัก)"  maxlength="14">
                         <button class="clear-input-button" id="clearvalue" type="clearButton">×</button>
                         <p id="resultconvertdate"></p>
                         <input type="hidden" id="hiddenDateInput">
                     </div>
         
                     <div class="message" id="copyMessagecookie"></div>
-                    <div class="jwt">
-                        <h3>JWT To JSON</h3>
-                        <textarea id="jwtInput" placeholder="Paste your JWT here..."></textarea>
+                    <h3>Encode</h3>
+                    <form id="conversionForm">
+                        <label>
+                            <input type="radio" name="conversionType" value="jwtToJson" checked onchange="updatePlaceholders()">
+                            Token To Json
+                        </label>
+                        <label>
+                            <input type="radio" name="conversionType" value="jsonToJwt" onchange="updatePlaceholders()">
+                            Json To Token
+                        </label>
+                        <textarea id="jwtInput" placeholder="Paste your Token here..."></textarea>
+                        <button type="button" onclick="convert()">Convert</button>
                         <textarea id="jsonOutput" placeholder="Converted JSON will appear here..." readonly></textarea>
-                    </div>
+                    
+                    </form>
                     
                 
                 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
