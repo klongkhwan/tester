@@ -202,6 +202,7 @@ button:hover {
     border: none;
     background-color: #f0f0f0;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 .calendar-button:hover {
@@ -274,6 +275,22 @@ button:hover {
     background-color: #54fd2c4d; /* สีพื้นหลังเมื่อชี้เมาส์ไปที่ปุ่ม */
 }
 
+#timeInput {
+    width: 350px;
+    height: 36px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#timeInput:focus {
+    border-color: #007bff;
+    background-color: #fff;
+    outline: none;
+}
 
 
 .input-wrapper {
