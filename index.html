@@ -17,7 +17,7 @@
     <nav>
         <ul>
             <li><a href="#" onclick="showSection('home')">Home</a></li>
-            <li><a href="#" onclick="showSection('menu1')">Knogwlage</a></li>
+            <li><a href="#" onclick="showSection('menu1')">Knowledge</a></li>
             <li><a href="#" onclick="showSection('menu2')">Tools</a></li>            
             <li><a href="#" onclick="showSection('about')">About</a></li>
         </ul>
@@ -49,6 +49,8 @@
             <div id="postman" class="tab-content">
                 <h1>Postman</h1>
                 <p>2024-08-09 08:09:31.576+00</p>
+                <p>INSERT INTO "ms_hospital"."ms_hospital_user_role" ("id", "username", "roleId", "hospCode", "hospType", "createdBy", "createdAt", "updatedAt") VALUES (2494, 'robotcliniter@gmail.com', 3, '05092', '2', 'นาย แชมป์ ขวัญชัย', '2024-08-31 09:27:15', '2024-08-31 09:27:22')</p>
+                <p>UPDATE "ms_hospital"."ms_hospital_user_role" SET "hospCode" = '05090' WHERE "id" = 2493</p>
             </div>
             <div id="sql" class="tab-content">
                 <h1>SQL</h1>
@@ -63,8 +65,8 @@
             <ul class="tabs">
                 <li class="tab-link active" data-tab="random">สุ่มทุกอย่าง</li>
                 <li class="tab-link" data-tab="Count">นับตัวอักษร</li>
+                <li class="tab-link" data-tab="date">วันที่และเวลา</li>
                 <li class="tab-link" data-tab="convert">แปลงค่า</li>
-                <li class="tab-link" data-tab="soon">เพิ่มเติม</li>
             </ul>
         
             <div id="random" class="tab-content active">
@@ -147,13 +149,54 @@
                 <div class="message" id="copyMessage"></div>
                 <script src="files/text.js"></script>
             </div>
-            <div id="convert" class="tab-content">
-                <h1>แปลงค่า</h1>
+            <div id="date" class="tab-content">
+                <h1>วันที่และเวลา</h1>
                     <div class="yearconvert">
-                        <h3>คำนวณปี</h3>
-                        <input type="number" id="numberInput" placeholder="เช่น 30">
-                        <button id="yearsum" onclick="calculateYear()">คำนวณ</button>
+                        <form id="ageForm">
+                            <label for="years">ปี:</label>
+                            <input type="number" id="inputyears" name="years" min="0" max="100" required>
+                            <br>
+                            <label for="months">เดือน:</label>
+                            <input type="number" id="inputmonths" name="months" min="0" max="11" required>
+                            <br>
+                            <label for="days">วัน:</label>
+                            <input type="number" id="inputdays" name="days" min="0" max="30" required>
+                        </form>
                         <p id="resultyear"></p>
+                        <script>
+                            function validateInput(inputId, maxValue) {
+                                const inputElement = document.getElementById(inputId);
+                                if (inputElement.value > maxValue) {
+                                    inputElement.value = maxValue;
+                                } else if (inputElement.value < 0) {
+                                    inputElement.value = 0;
+                                }
+                            }
+                    
+                            function calculateDate() {
+                                validateInput('inputmonths', 11);
+                                validateInput('inputdays', 30);
+                                validateInput('inputyears', 100);
+                    
+                                const currentDate = new Date();
+                                const years = parseInt(document.getElementById('inputyears').value) || 0;
+                                const months = parseInt(document.getElementById('inputmonths').value) || 0;
+                                const days = parseInt(document.getElementById('inputdays').value) || 0;
+                    
+                                let targetDate = new Date(currentDate);
+                                targetDate.setFullYear(targetDate.getFullYear() - years);
+                                targetDate.setMonth(targetDate.getMonth() - months);
+                                targetDate.setDate(targetDate.getDate() - days);
+                    
+                                let resultDate = targetDate.getDate() + "/" + (targetDate.getMonth() + 1) + "/" + (targetDate.getFullYear() + 543);
+                    
+                                document.getElementById('resultyear').innerText = resultDate;
+                            }
+                    
+                            document.getElementById('inputyears').addEventListener('input', calculateDate);
+                            document.getElementById('inputmonths').addEventListener('input', calculateDate);
+                            document.getElementById('inputdays').addEventListener('input', calculateDate);
+                        </script>
                     </div>            
                         <h3>แปลงวันและเวลา</h3>
                         <label><input type="radio" name="timeFormat" value="format1" checked> รูปแบบ 1</label>
@@ -168,7 +211,13 @@
                     </div>
         
                     <div class="message" id="copyMessagecookie"></div>
-                    <h3>Encode</h3>
+                
+                <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+            <script src="files/datetime.js"></script>    
+            </div>
+            <div id="convert" class="tab-content">
+                <h1>แปลงค่า</h1>
+                <h3>Encode</h3>
                     <form id="conversionForm">
                         <label>
                             <input type="radio" name="conversionType" value="jwtToJson" checked onchange="updatePlaceholders()">
@@ -181,15 +230,8 @@
                         <textarea id="jwtInput" placeholder="Paste your Token here..."></textarea>
                         <button type="button" onclick="convert()">Convert</button>
                         <textarea id="jsonOutput" placeholder="Converted JSON will appear here..." readonly></textarea>
-                    
                     </form>
-                    
-                
-                <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
             <script src="files/convert.js"></script>    
-            </div>
-            <div id="soon" class="tab-content">
-                <h1>soon</h1>
             </div>
         </div>
         <script src="files/scripts.js"></script>
