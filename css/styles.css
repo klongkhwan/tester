@@ -436,7 +436,7 @@ textarea {
     border-radius: 5px; /* เพิ่มการโค้งมนที่ขอบ */
 }
 
-#charCountInput,#numberInput {
+#charCountInput,#inputyears,#inputmonths,#inputdays {
     text-align: center;
     width: 80px; /* กำหนดความกว้าง */
     height: 10px; /* กำหนดความสูง */
@@ -447,10 +447,49 @@ textarea {
 }
 
 /* ปรับสีพื้นหลังและสีอักษร */
-#charCountInput,#numberInput {
+#charCountInput,#inputyears,#inputmonths,#inputdays  {
     background-color: #000000; /* สีพื้นหลัง */
     color:var(--primary-color);
 }
+
+.yearconvert {
+
+    padding: 20px;
+    border-radius: 10px;
+    color: white; /* Text color for good contrast */
+    width: 200px; /* Adjust the width as per your design */
+}
+
+.yearconvert h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.yearconvert form {
+    display: flex;
+    flex-direction: column;
+}
+
+.yearconvert label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.yearconvert input[type="text"] {
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #333;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+}
+
+.yearconvert input[type="text"]:focus {
+    border-color: #555;
+    outline: none;
+}
+
+
 
 .spinner {
     width: 56px;
