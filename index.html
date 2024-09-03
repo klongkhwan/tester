@@ -151,53 +151,19 @@
             </div>
             <div id="date" class="tab-content">
                 <h1>วันที่และเวลา</h1>
-                    <div class="yearconvert">
-                        <form id="ageForm">
-                            <label for="years">ปี:</label>
-                            <input type="number" id="inputyears" name="years" min="0" max="100" required>
-                            <br>
-                            <label for="months">เดือน:</label>
-                            <input type="number" id="inputmonths" name="months" min="0" max="11" required>
-                            <br>
-                            <label for="days">วัน:</label>
-                            <input type="number" id="inputdays" name="days" min="0" max="30" required>
-                        </form>
-                        <p id="resultyear"></p>
-                        <script>
-                            function validateInput(inputId, maxValue) {
-                                const inputElement = document.getElementById(inputId);
-                                if (inputElement.value > maxValue) {
-                                    inputElement.value = maxValue;
-                                } else if (inputElement.value < 0) {
-                                    inputElement.value = 0;
-                                }
-                            }
-                    
-                            function calculateDate() {
-                                validateInput('inputmonths', 11);
-                                validateInput('inputdays', 30);
-                                validateInput('inputyears', 100);
-                    
-                                const currentDate = new Date();
-                                const years = parseInt(document.getElementById('inputyears').value) || 0;
-                                const months = parseInt(document.getElementById('inputmonths').value) || 0;
-                                const days = parseInt(document.getElementById('inputdays').value) || 0;
-                    
-                                let targetDate = new Date(currentDate);
-                                targetDate.setFullYear(targetDate.getFullYear() - years);
-                                targetDate.setMonth(targetDate.getMonth() - months);
-                                targetDate.setDate(targetDate.getDate() - days);
-                    
-                                let resultDate = targetDate.getDate() + "/" + (targetDate.getMonth() + 1) + "/" + (targetDate.getFullYear() + 543);
-                    
-                                document.getElementById('resultyear').innerText = resultDate;
-                            }
-                    
-                            document.getElementById('inputyears').addEventListener('input', calculateDate);
-                            document.getElementById('inputmonths').addEventListener('input', calculateDate);
-                            document.getElementById('inputdays').addEventListener('input', calculateDate);
-                        </script>
-                    </div>            
+                        <div class="yearconvert">
+                            <form id="ageForm">
+                                <label for="years">ปี:</label>
+                                <input type="number" id="inputyears" name="years" min="0" max="100" required>
+                                <br>
+                                <label for="months">เดือน:</label>
+                                <input type="number" id="inputmonths" name="months" min="0" max="11" required>
+                                <br>
+                                <label for="days">วัน:</label>
+                                <input type="number" id="inputdays" name="days" min="0" max="30" required>
+                            </form>
+                            <p id="resultyear"></p>
+                        </div>            
                         <h3>แปลงวันและเวลา</h3>
                         <label><input type="radio" name="timeFormat" value="format1" checked> รูปแบบ 1</label>
                         <label><input type="radio" name="timeFormat" value="format2"> รูปแบบ 2 </label>
@@ -208,12 +174,10 @@
                         <button class="clear-input-button" id="clearvalue" type="clearButton">×</button>
                         <p id="resultconvertdate"></p>
                         <input type="hidden" id="hiddenDateInput">
-                    </div>
-        
-                    <div class="message" id="copyMessagecookie"></div>
-                
+                        </div>
+                        <div class="message" id="copyMessagecookie"></div>
                 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-            <script src="files/datetime.js"></script>    
+                <script src="files/datetime.js"></script>    
             </div>
             <div id="convert" class="tab-content">
                 <h1>แปลงค่า</h1>
