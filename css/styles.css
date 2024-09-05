@@ -453,8 +453,6 @@ textarea {
 }
 
 .yearconvert {
-
-    padding: 20px;
     border-radius: 10px;
     color: white; /* Text color for good contrast */
     width: 200px; /* Adjust the width as per your design */
@@ -487,6 +485,13 @@ textarea {
 .yearconvert input[type="text"]:focus {
     border-color: #555;
     outline: none;
+}
+
+#ageForm{
+    display: flex;
+    gap: 10px; /* ปรับระยะห่างระหว่างช่องป้อนข้อมูล */
+    flex-direction:row;
+
 }
 
 
