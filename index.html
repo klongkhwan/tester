@@ -72,14 +72,14 @@
             <div id="random" class="tab-content active">
                 <h1>สุ่มชื่อและนามสกุล</h1>
                 <div class="radio-group">
-                    <label>
-                        <input type="radio" name="language" value="thai" checked>
+                    <label class="custom-radio">
+                        <input type="radio" name="language" value="thai" checked><span class="radio-checkmark"></span>
                         สุ่มชื่อภาษาไทย
                     </label>
                 </div>
                 <div class="radio-group">
-                    <label>
-                        <input type="radio" name="language" value="english">
+                    <label class="custom-radio">
+                        <input type="radio" name="language" value="english"><span class="radio-checkmark"></span>
                         สุ่มชื่อภาษาอังกฤษ
                     </label>
                 </div>
@@ -151,6 +151,7 @@
             </div>
             <div id="date" class="tab-content">
                 <h1>วันที่และเวลา</h1>
+                        <h3>คำนวณวันเกิดจากอายุ</h3>
                         <div class="yearconvert">
                             <form id="ageForm">
                                 <label for="years">ปี:</label>
@@ -165,9 +166,9 @@
                             <p id="resultyear"></p>
                         </div>            
                         <h3>แปลงวันและเวลา</h3>
-                        <label><input type="radio" name="timeFormat" value="format1" checked> รูปแบบ 1</label>
-                        <label><input type="radio" name="timeFormat" value="format2"> รูปแบบ 2 </label>
-                        <label><input type="radio" name="timeFormat" value="format3"> รูปแบบ 3 </label>
+                        <label class="custom-radio"><input type="radio" name="timeFormat" value="format1" checked> รูปแบบ 1<span class="radio-checkmark"></span></label>
+                        <label class="custom-radio"><input type="radio" name="timeFormat" value="format2"> รูปแบบ 2 <span class="radio-checkmark"></span></label>
+                        <label class="custom-radio"><input type="radio" name="timeFormat" value="format3"> รูปแบบ 3 <span class="radio-checkmark"></span></label>
                         <div class="input-wrapper">
                         <button class="calendar-button" id="calendarButton" type="button">📅</button>
                         <input class="clear-input" type="text" id="timeInput" placeholder="YYYYMMDDHHMMSS (14 หลัก)"  maxlength="14">
@@ -183,17 +184,37 @@
                 <h1>แปลงค่า</h1>
                 <h3>Encode</h3>
                     <form id="conversionForm">
-                        <label>
-                            <input type="radio" name="conversionType" value="jwtToJson" checked onchange="updatePlaceholders()">
+                        <label class="custom-radio">
+                            <input  type="radio" name="conversionType" value="jwtToJson" checked onchange="updatePlaceholders()">
+                            <span class="radio-checkmark"></span>
                             Token To Json
                         </label>
-                        <label>
+                        <label class="custom-radio">
                             <input type="radio" name="conversionType" value="jsonToJwt" onchange="updatePlaceholders()">
+                            <span class="radio-checkmark"></span>
                             Json To Token
                         </label>
+                        <label class="custom-radio">
+                            <input type="radio" name="conversionType" value="compareJson" onchange="updatePlaceholders()">
+                            <span class="radio-checkmark"></span>
+                            Compare JSON
+                        </label>
+                        <label class="custom-radio">
+                            <input type="radio" name="conversionType" value="64toimg" onchange="updatePlaceholders()">
+                            <span class="radio-checkmark"></span>
+                            Convert IMG
+                        </label>
+                        
                         <textarea id="jwtInput" placeholder="Paste your Token here..."></textarea>
-                        <button type="button" onclick="convert()">Convert</button>
-                        <textarea id="jsonOutput" placeholder="Converted JSON will appear here..." readonly></textarea>
+                        <button type="button" id="convertButton"  onclick="convert()">Convert</button>
+                        <textarea id="jsonOutput"  placeholder="Converted JSON will appear here..." ></textarea>
+                        <!-- แสดงผลลัพธ์ความแตกต่าง -->
+                        <div id="comparisonResult" style="display: none; white-space: pre-wrap; border: 1px solid #ddd; padding: 10px; margin-top: 10px; font-family: monospace;"></div>
+                        <div id="imageContainer" style="display: none;"></div>
+                        <div id="fileInfo" style="display: none;"></div>
+
+                        <!-- ปุ่มย้อนกลับ -->
+                        <button type="button" id="backButton" onclick="goBack()" style="display: none;">Back</button>
                     </form>
             <script src="files/convert.js"></script>    
             </div>
