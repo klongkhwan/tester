@@ -1,58 +1,64 @@
 :root {
-    --primary-color: #5BFF2E; 
-    --secondary-color: #5BFF2E; 
-    --text-black: #000; 	 	
-    --text-white: #ffffff; 
-    --second-text-color: #B2B3BD;
-    --button-bg-color: #3dff121d; 
-    --button-text-color: #67fe43f5; 
-    --button-hover-color:: #54fd2c4d; 
+    --primary-color: #cb64ff; 	 
+    --second-color: #0a2d33;	
+    --black-color: #0c262e;
+    --button-bg-color: #03852a; 
   }
 
 
 body {
-    font-family: 'Cursive', sans-serif;
-    background: url(bg.jpg);
+    font-family: 'Prompt', sans-serif; /* กำหนดฟ้อนต์ใหม่ */
+    font-size: 16px; /* กำหนดขนาดฟ้อนต์ */
+    line-height: 1.5; /* กำหนดความสูงบรรทัด */
+    color: #020000;
+    font-weight: bold;
+    background: #f4e2ff; 
     background-size: cover;
     margin: 0;
     padding: 0;
 }
 
 nav {
-    background-color: #333;
+    background: linear-gradient(90deg, #3c2c55, #2c1a3d); /* เพิ่ม gradient */
     padding: 10px;
-    height: 40px;
+    height: 50px; /* เพิ่มความสูงเล็กน้อย */
     display: flex;
-    justify-content: center; /* จัดกึ่งกลางตามแนวนอน */
+    justify-content: center;
+    align-items: center; /* จัดกึ่งกลางแนวตั้ง */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* เพิ่มเงา */
+
 }
 
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    display: flex; /* ใช้ flexbox กับ ul เพื่อให้ li เรียงตามแนวนอน */
+    display: flex;
 }
 
 ul li {
     position: relative;
-    margin-right: 10px; /* กำหนดระยะห่างระหว่างเมนู */
+    margin-right: 20px; /* เพิ่มช่องว่างระหว่างเมนู */
 }
 
 ul li:last-child {
-    margin-right: 0; /* ลบระยะห่างในรายการสุดท้าย */
+    margin-right: 0;
 }
 
 ul li a {
     color: #fff;
     text-decoration: none;
-    padding: 10px 15px;
+    padding: 12px 20px; /* เพิ่มพื้นที่ภายใน */
     display: block;
-    transition: background-color 0.3s ease;
+    border-radius: 5px; /* มุมโค้ง */
+    transition: all 0.3s ease; /* เพิ่ม transition */
+    background: rgba(255, 255, 255, 0.1); /* พื้นหลังโปร่งใสเล็กน้อย */
 }
 
 ul li a:hover {
-
-    border-bottom: 3px solid var(--primary-color)
+    background: rgba(255, 255, 255, 0.2); /* เปลี่ยนสีพื้นหลังเมื่อ hover */
+    border-bottom: 3px solid #fff; /* เส้นขีดล่าง */
+    transform: scale(1.05); /* ขยายเล็กน้อยเมื่อ hover */
 }
 
 ul li ul {
@@ -60,8 +66,10 @@ ul li ul {
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #333;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    background: #2c1a3d; /* ใช้สีที่กลมกลืน */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* เพิ่มเงา */
+    border-radius: 8px; /* มุมโค้ง */
+    overflow: hidden; /* ป้องกันส่วนเกิน */
 }
 
 ul li:hover ul {
@@ -70,12 +78,19 @@ ul li:hover ul {
 
 ul li ul li {
     display: block;
-    width: 150px;
+    width: 180px; /* เพิ่มความกว้าง */
 }
 
 ul li ul li a {
-    padding: 10px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05); /* เพิ่ม layer */
+    transition: background 0.3s ease;
 }
+
+ul li ul li a:hover {
+    background: rgba(255, 255, 255, 0.2); /* เปลี่ยนสีเมื่อ hover */
+}
+
 
 .tab-container {
     width: 100%;
@@ -86,38 +101,49 @@ ul li ul li a {
     padding: 0;
     display: flex;
     margin-bottom: 10px;
+    border-radius: 5px; /* มุมโค้ง */
 }
 
 .tab-link {
-    padding: 10px 20px;
+    padding: 12px 25px; /* เพิ่มพื้นที่ภายในแท็บ */
     cursor: pointer;
-    color: #ffffff;
-    margin-right: 5px;
-    border-radius: 5px 5px 0 0;
-    font-family: 'Kanit-Bold', sans-serif;
+    color: #ffffff; /* สีข้อความ */
+    background-color: #7c5b8f; /* สีพื้นหลังหลัก */
+    margin-right: 5px; /* ระยะห่างระหว่างแท็บ */
+    border-radius: 8px 8px 0 0; /* มุมโค้งด้านบน */
+    font-family: 'Kanit', sans-serif; /* ฟอนต์หลัก */
+    font-size: 18px; /* ขนาดข้อความ */
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s; /* เพิ่มเอฟเฟกต์ */
 }
 
+/* เพิ่มเอฟเฟกต์เมื่อ hover */
+.tab-link:hover {
+    background-color: var(--black-color); /* สีเข้มขึ้นเมื่อ hover */
+    transform: translateY(-5px); /* ยกขึ้นเล็กน้อย */
+}
+
+/* เมื่อแท็บถูกเลือก (active) */
 .tab-link.active {
-    background-color: #5BFF2E;
-    color: #000;
-    border-bottom: none;
+    background-color: var(--black-color);
+    color: #67fe43f5;
+    border-bottom: 3px solid transparent; /* ซ่อนขอบล่าง */
 }
 
-.tab-content {
-    display: none;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.2);
-    -webkit-backdrop-filter: blur(3px);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+/* สำหรับแท็บที่ยังไม่ active */
+.tab-link.nonactive {
+    background-color: #f4f4f4; /* สีพื้นหลัง */
+    color: #666; /* สีข้อความ */
+    border-bottom: 1px solid #ccc; /* เส้นขอบล่าง */
 }
 
-.tab-content.active {
-    display: block;
+/* การจัดวางแท็บในคอนเทนเนอร์ */
+.tabs {
+    display: flex; /* จัดวางแท็บในแนวนอน */
+    border-bottom: 2px solid #ddd; /* เส้นขอบล่างของกลุ่มแท็บ */
+    margin-bottom: 10px; /* ระยะห่างระหว่างแท็บกับเนื้อหา */
 }
-
-
-
 
 
 section {
@@ -125,23 +151,35 @@ section {
     max-width: 800px;
     margin: 20px auto;
     padding: 30px;
-    background: rgba(0, 0, 0, 0.2);
-    -webkit-backdrop-filter: blur(3px);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, rgb(217, 199, 250), rgb(179, 155, 240));
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
 }
 
 section h1 {
-    color: #ffffff;
-    font-size: 24px;
-    margin-bottom: 10px;
+    color: #020000;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 section p {
-    color: #ffffff;
-    font-size: 16px;
-    line-height: 1.5;
+    color: #f3f3f3;
+    font-size: 18px;
+    line-height: 1.8;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
 }
+
 
 /* Show home section by default */
 #home {
@@ -157,13 +195,97 @@ h1 {
 }
 
 h3 {
-    color: #ffffff;
+    color: #000000;
     font-size: 1em;
+    margin-top: 5px;
+}
+
+#link {
+    color: #26a3d4;
+    font-size: 0.8em;
     margin-top: 10px;
 }
 
+
+
+/* กล่องควบคุม */
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+label {
+    font-size: 1rem;
+    margin-right: 10px;
+    align-self: center;
+}
+
+input[type="number"] {
+    width: 80px;
+    padding: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    text-align: center;
+}
+
 button {
-    background-color: #3dff121d; /* สีพื้นหลังของปุ่ม */
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+
+button#clearText {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+button#clearText:hover {
+    background-color: #c82333;
+}
+
+/* textarea */
+textarea {
+    width: 100%;
+    max-width: 770px;
+    height: 150px;
+    padding: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    resize: none;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ผลลัพธ์ */
+.results {
+    font-size: 1rem;
+    padding: 5px;
+    width: 100%;
+    max-width: 770px;
+    text-align: center;
+
+}
+
+.results p {
+    margin: 5px 0;
+}
+
+.results strong {
+    color: #f8fa7a;
+}
+
+
+button {
+    background-color: var(--black-color); /* สีพื้นหลังของปุ่ม */
     border: none; /* ไม่มีขอบ */
     color: #67fe43f5; /* สีของตัวอักษร */
     padding: 10px 20px; /* ขนาดของปุ่ม */
@@ -177,13 +299,40 @@ button {
 }
 
 button:hover {
-    background-color: #54fd2c4d; /* สีพื้นหลังเมื่อชี้เมาส์ไปที่ปุ่ม */
+    background-color: #0b4409; /* สีพื้นหลังเมื่อชี้เมาส์ไปที่ปุ่ม */
 }
 
 .controlscheckbox {
-    color: var(--text-white);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* ระยะห่างระหว่างแต่ละรายการ */
+    padding: 5px;
+
+}
+
+.controlscheckbox label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    padding: 5px 10px;
+    transition: all 0.3s ease; /* การเปลี่ยนแปลงที่นุ่มนวล */
+    cursor: pointer;
     margin-bottom: 5px;
 }
+
+.controlscheckbox label:hover {
+    background-color: #e7cdf1; /* สีเปลี่ยนเมื่อ hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* เพิ่มเงาเมื่อ hover */
+}
+
+.controlscheckbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #007bff; /* เปลี่ยนสี checkbox */
+}
+
 
 #clearText {
     padding: 2px 12px;
@@ -202,7 +351,7 @@ button:hover {
     border: none;
     background-color: #f0f0f0;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .calendar-button:hover {
@@ -230,9 +379,9 @@ button:hover {
 
 
 #resultcard, #resultname, #resultphone,#resultconvertdate,#resultcookie,#resultyear {
-    margin-top: 15px;
+    margin-top: 5px;
     font-size: 1.2em;
-    color: #B2B3BD;
+    color: #650194;
 }
 
 #copyMessage, #copyMessagename, #copyMessagephone {
@@ -244,7 +393,7 @@ button:hover {
 }
 
 .message {
-    margin-top: 10px;
+    margin-top: 5px;
     font-size: 0.7em;
 }
 
@@ -256,9 +405,8 @@ button:hover {
     color: green;
 }
 
-
 #buttoncopyfixtext {
-    background-color: #3dff121d; /* สีพื้นหลังของปุ่ม */
+    background-color: var(--black-color); /* สีพื้นหลังของปุ่ม */
     border: none; /* ไม่มีขอบ */
     color: #67fe43f5; /* สีของตัวอักษร */
     padding: 10px 10px; /* ขนาดของปุ่ม */
@@ -272,7 +420,7 @@ button:hover {
 }
 
 #buttoncopyfixtext:hover {
-    background-color: #54fd2c4d; /* สีพื้นหลังเมื่อชี้เมาส์ไปที่ปุ่ม */
+    background-color: #26a3d4; /* สีพื้นหลังเมื่อชี้เมาส์ไปที่ปุ่ม */
 }
 
 #timeInput {
@@ -382,7 +530,7 @@ label {
 #generateButton,#yearsum {
     font-size: 16px; /* ขนาดตัวอักษรของปุ่ม */
     padding: 2px 12px;
-    background-color: var(--button-bg-color);
+    background-color: #0b4157;
     border: none; /* ไม่มีขอบ */
     border-radius: 5px; /* มุมป-rounded */
     cursor: pointer; /* แสดงตัวชี้เป็นมือเมื่ออยู่เหนือปุ่ม */
@@ -390,7 +538,7 @@ label {
 }
 
 #generateButton:hover, #yearsum:hover {
-    background-color: #54fd2c4d; /* สีเมื่อ hover */
+    background-color: #0073a0; /* สีเมื่อ hover */
     cursor: pointer; /* เปลี่ยน cursor เป็น pointer */
     transition: background-color 0.3s ease; /* เพิ่ม transition สำหรับเอฟเฟกต์ที่นุ่มนวล */
 }
@@ -403,10 +551,81 @@ label {
     
 }
 
+#imageContainer, #fileInfo {
+    display: none; /* ซ่อนเริ่มต้น */
+    width: 100%; /* ให้ container ใช้ความกว้างเต็มที่ */
+    max-width: 400px; /* ความกว้างสูงสุดของ container */
+    min-width: 300px; /* ความกว้างต่ำสุด */
+    margin: 0 auto; /* จัดตำแหน่งให้กลางหน้าจอ */
+    text-align: center; /* ให้ข้อความหรือรูปแสดงในแนวกลาง */
+  }
 
+  #imageContainer img {
+    width: 100%; /* ทำให้รูปภาพมีความกว้างเต็ม container */
+    max-width: 400px; /* ความกว้างสูงสุดของรูปภาพ */
+    min-width: 300px; /* ความกว้างต่ำสุดของรูปภาพ */
+    height: auto; /* ให้ความสูงของภาพปรับตามอัตราส่วน */
+  }
 
-textarea {
-    background-color: #000000; /* เพิ่มพื้นหลังสีเทาอ่อน */
+/* ซ่อน input type radio ดั้งเดิม */
+.custom-radio input[type="radio"] {
+    display: none;
+}
+
+/* สไตล์ของ label */
+.custom-radio {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    padding-left: 30px; /* เพิ่มพื้นที่ให้กับ radio button */
+}
+
+/* สร้างกล่อง radio button แบบกำหนดเอง */
+.custom-radio .radio-checkmark {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border: 2px solid #dcdddf;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    font-size: large;
+}
+
+/* สไตล์เมื่อ radio button ถูกเลือก */
+.custom-radio input[type="radio"]:checked + .radio-checkmark {
+    background-color: #e8eff7;
+    border-color: #ad05f025;
+}
+
+/* เพิ่มเครื่องหมายเช็คเมื่อถูกเลือก */
+.custom-radio input[type="radio"]:checked + .radio-checkmark::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #7b0280;
+}
+
+/* สีเมื่อไม่เลือก */
+.custom-radio input[type="radio"]:not(:checked) + .radio-checkmark {
+    background-color: #fff;
+    border-color: #ccc;
+}
+  
+
+textarea, #jwtInput {
+    background-color: #f5f3f3; /* เพิ่มพื้นหลังสีเทาอ่อน */
     color: var(--text-white);
     margin-bottom: 10px;
     margin-top: 10px;
@@ -416,7 +635,7 @@ textarea {
     resize: none;
 }
 .resultstextarea {
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .results {
@@ -448,7 +667,7 @@ textarea {
 
 /* ปรับสีพื้นหลังและสีอักษร */
 #charCountInput,#inputyears,#inputmonths,#inputdays  {
-    background-color: #000000; /* สีพื้นหลัง */
+    background-color: #f7f1f1; /* สีพื้นหลัง */
     color:var(--primary-color);
 }
 
@@ -460,7 +679,7 @@ textarea {
 
 .yearconvert h3 {
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .yearconvert form {
@@ -475,7 +694,7 @@ textarea {
 
 .yearconvert input[type="text"] {
     padding: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     border: 1px solid #333;
     background-color: #333;
     color: white;
@@ -489,6 +708,11 @@ textarea {
 
 #ageForm{
     display: flex;
+    font-family: 'Prompt', sans-serif; /* กำหนดฟ้อนต์ใหม่ */
+    font-size: 16px; /* กำหนดขนาดฟ้อนต์ */
+    line-height: 1.5; /* กำหนดความสูงบรรทัด */
+    color: #020000;
+    font-weight: bold;
     gap: 10px; /* ปรับระยะห่างระหว่างช่องป้อนข้อมูล */
     flex-direction:row;
 
@@ -500,8 +724,8 @@ textarea {
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background: radial-gradient(farthest-side,#5bff2e 94%,#0000) top/9px 9px no-repeat,
-               conic-gradient(#0000 30%,#5bff2e);
+    background: radial-gradient(farthest-side,#64058a 94%,#0000) top/9px 9px no-repeat,
+               conic-gradient(#0000 30%,#bc50ee);
     -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 9px),#000 0);
     animation: spinner-c7wet2 1s infinite linear;
     position: fixed;
