@@ -12,7 +12,7 @@ body {
     line-height: 1.5; /* กำหนดความสูงบรรทัด */
     color: #020000;
     font-weight: bold;
-    background: #f4e2ff; 
+    background: #efe5f5; 
     background-size: cover;
     margin: 0;
     padding: 0;
@@ -151,7 +151,7 @@ section {
     max-width: 800px;
     margin: 20px auto;
     padding: 30px;
-    background: linear-gradient(135deg, rgb(217, 199, 250), rgb(179, 155, 240));
+    background: linear-gradient(135deg, rgb(225, 213, 248), rgb(195, 177, 241));
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     -webkit-backdrop-filter: blur(8px);
