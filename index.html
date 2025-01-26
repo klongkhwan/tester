@@ -48,12 +48,20 @@
             </div>
             <div id="postman" class="tab-content">
                 <h1>Postman</h1>
-                <p>2024-08-09 08:09:31.576+00</p>
-                <p>INSERT INTO "ms_hospital"."ms_hospital_user_role" ("id", "username", "roleId", "hospCode", "hospType", "createdBy", "createdAt", "updatedAt") VALUES (2494, 'robotcliniter@gmail.com', 3, '05092', '2', 'นาย แชมป์ ขวัญชัย', '2024-08-31 09:27:15', '2024-08-31 09:27:22')</p>
-                <p>UPDATE "ms_hospital"."ms_hospital_user_role" SET "hospCode" = '05090' WHERE "id" = 2493</p>
             </div>
             <div id="sql" class="tab-content">
                 <h1>SQL</h1>
+                    <textarea id="textAreasql" placeholder="เลือกรูปแบบ..." oninput="toggleCopyButton()" disabled ></textarea>
+                    <h3>รูปแบบใช้งาน</h3>
+                    <div class="controls">
+                        <button id="buttoncopyfixtext"  class="copyButton" onclick="copyText('VisitInfo')">Visit Info</button>
+                        <button id="buttoncopyfixtext"  class="copyButton" onclick="copyText('join1')">1 join</button>
+                        <button id="buttoncopyfixtext"  class="copyButton" onclick="copyText('join2')">2 join</button>
+                        <button id="buttoncopyfixtext"  class="copyButton" onclick="copyText('schema2')">2 schema</button>
+                    </div>
+    
+                    <div class="message" id="copyMessage"></div>
+                    <script src="files/sql.js"></script>
             </div>
         </div>
         <script src="files/scripts.js"></script>
@@ -169,6 +177,7 @@
                         <label class="custom-radio"><input type="radio" name="timeFormat" value="format1" checked> รูปแบบ 1<span class="radio-checkmark"></span></label>
                         <label class="custom-radio"><input type="radio" name="timeFormat" value="format2"> รูปแบบ 2 <span class="radio-checkmark"></span></label>
                         <label class="custom-radio"><input type="radio" name="timeFormat" value="format3"> รูปแบบ 3 <span class="radio-checkmark"></span></label>
+                        <br>
                         <div class="input-wrapper">
                         <button class="calendar-button" id="calendarButton" type="button">📅</button>
                         <input class="clear-input" type="text" id="timeInput" placeholder="YYYYMMDDHHMMSS (14 หลัก)"  maxlength="14">
@@ -202,16 +211,29 @@
                         <label class="custom-radio">
                             <input type="radio" name="conversionType" value="64toimg" onchange="updatePlaceholders()">
                             <span class="radio-checkmark"></span>
-                            Convert IMG
+                            Convert Img
+                        </label>
+                        <label class="custom-radio">
+                            <input type="radio" name="conversionType" value="hextofile" onchange="updatePlaceholders()">
+                            <span class="radio-checkmark"></span>
+                            Convert Files
                         </label>
                         
                         <textarea id="jwtInput" placeholder="Paste your Token here..."></textarea>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+                        <select id="outputType">
+                            <option value="pdf">PDF</option>
+                            <option value="excel">Excel</option>
+                            <option value="binary">Binary</option>
+                        </select>
                         <button type="button" id="convertButton"  onclick="convert()">Convert</button>
                         <textarea id="jsonOutput"  placeholder="Converted JSON will appear here..." ></textarea>
                         <!-- แสดงผลลัพธ์ความแตกต่าง -->
                         <div id="comparisonResult" style="display: none; white-space: pre-wrap; border: 1px solid #ddd; padding: 10px; margin-top: 10px; font-family: monospace;"></div>
                         <div id="imageContainer" style="display: none;"></div>
                         <div id="fileInfo" style="display: none;"></div>
+                        
 
                         <!-- ปุ่มย้อนกลับ -->
                         <button type="button" id="backButton" onclick="goBack()" style="display: none;">Back</button>
