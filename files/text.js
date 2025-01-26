@@ -52,7 +52,6 @@ function toggleCopyButton() {
     copyButton.disabled = textArea.value.trim() === "";
 }
 
-// Toggles the generateRandom
 function generateRandom(charCount) {
     const thaiChars = 'กขคงจฉชซฌญฎฏฐฑฒณดตถทธนบปผฝพฟภมยรฤลฦวศษสหฬอฮ';
     const englishChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -100,7 +99,7 @@ function copyJsonData(key) {
         "10": "หวัดดี kub",
         "50": "ยินดีต้อนรับเข้าสู่ประเทศไทย Welcome to Tester CAT",
         "100": "บริษัทเรามีชื่อเสียงในด้านคุณภาพ Our company is renowned for its quality and innovation ใช่มันสุดยอด",
-        "255": "นักทดสอบซอฟต์แวร์ มีบทบาทสำคัญในการตรวจสอบคุณภาพของระบบและโปรแกรม เพื่อให้มั่นใจว่าซอฟต์แวร์ทำงานได้ตามที่กำหนด ไม่มีข้อผิดพลาดใดๆ การทดสอบที่ละเอียดและรอบคอบช่วยป้องกันปัญหาที่อาจเกิดขึ้นในอนาคต Ensuring quality software delivery is our top priority",
+        "255": "นักทดสอบซอฟต์แวร์ มีบทบาทสำคัญในการตรวจสอบคุณภาพของระบบและโปรแกรม เพื่อให้มั่นใจว่าซอฟต์แวร์ทำงานได้ตามที่กำหนด ไม่มีข้อผิดพลาดใดๆ การทดสอบที่ละเอียดและรอบคอบช่วยป้องกันปัญหาที่อาจเกิดขึ้นในอนาคต Ensuring quality software delivery is our top priority  255",
         ">10": "สวัสดีครับคนเทส10",
         ">50": "ความสำเร็จไม่ใช่จุดหมายปลายทาง แต่เป็นการเดินทางที่ยาวนาน50",
         ">100": "ความพยายามไม่เคยทรยศใคร จงทำวันนี้ให้ดีที่สุด เพื่อวันพรุ่งนี้ที่มีบัครอเราอยู่ susu ขยันวันนี้ สบายวันไหน100",

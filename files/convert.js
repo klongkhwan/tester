@@ -27,6 +27,9 @@ function updatePlaceholders() {
         jwtInput.placeholder = 'Paste your BASE64 here...';
         jsonOutput.placeholder = 'Paste your JSON here...';
         convertButton.innerText = 'Convert'; // เปลี่ยนชื่อปุ่มเป็น Convert
+    } else if (conversionType === 'hextofile') {
+        jwtInput.placeholder = 'Paste your hex here...';
+        convertButton.innerText = 'Convert'; // เปลี่ยนชื่อปุ่มเป็น Convert
     }
 }
 
@@ -106,7 +109,7 @@ function convert() {
             alert("Invalid JSON format. Please check your JSON inputs.");
         }
     } else if (conversionType === '64toimg') {
-        // ซ่อน jsonOutput
+        // Hide jsonOutput
         jsonOutput.style.display = 'none';
     
         if (!jwtInput) {
@@ -124,9 +127,7 @@ function convert() {
             const sizeInBytes = Math.ceil((img.src.length * (3 / 4)) - (img.src.endsWith('==') ? 2 : 1));
             const sizeInKB = (sizeInBytes / 1024).toFixed(2);
     
-            // แสดงรูปภาพและข้อมูลไฟล์
-            const imageContainer = document.getElementById('imageContainer') || createImageContainer();
-            const fileInfo = document.getElementById('fileInfo') || createFileInfoContainer();
+            // Show image and file info
             imageContainer.style.display = 'block';
             imageContainer.innerHTML = '';
             imageContainer.appendChild(img);
@@ -143,9 +144,66 @@ function convert() {
     
         img.onerror = function () {
             alert('Invalid Base64 code or unsupported image format.');
-        };
+        }
+    } else if (conversionType === 'hextofile') {
+        const hexInput = document.getElementById('jwtInput').value;
+        const outputType = document.getElementById('outputType').value;
+    
+        // Basic hex validation
+        if (!/^([0-9A-Fa-f]{2})+$/.test(hexInput.replace(/\s/g, ''))) {
+            alert('รูปแบบ Hex ไม่ถูกต้อง');
+            return;
+        }
+    
+        // Remove whitespaces and convert hex to binary
+        const hexData = hexInput.replace(/\s/g, '');
+        const binaryData = hexToBytes(hexData);
+    
+        switch(outputType) {
+            case 'pdf':
+                generatePDF(binaryData);
+                break;
+            case 'excel':
+                generateExcel(binaryData);
+                break;
+            case 'binary':
+                downloadBinary(binaryData);
+                break;
+        }
     }
-}   
+}
+
+function hexToBytes(hex) {
+    const bytes = [];
+    for (let i = 0; i < hex.length; i += 2) {
+        bytes.push(parseInt(hex.substr(i, 2), 16));
+    }
+    return bytes;
+}
+
+function generatePDF(binaryData) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    doc.text('Hex Conversion Result', 10, 10);
+    doc.text(binaryData.toString(), 10, 20);
+    doc.save('hex_conversion.pdf');
+}
+
+function generateExcel(binaryData) {
+    const worksheet = XLSX.utils.aoa_to_sheet([binaryData]);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Hex Data');
+    XLSX.writeFile(workbook, 'hex_conversion.xlsx');
+}
+
+function downloadBinary(binaryData) {
+    const blob = new Blob([new Uint8Array(binaryData)], {type: 'application/octet-stream'});
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'hex_conversion.bin';
+    link.click();
+}
+
 
 document.querySelectorAll('input[name="conversionType"]').forEach(radio => {
     radio.addEventListener('change', () => {
@@ -197,55 +255,77 @@ document.querySelectorAll('input[name="conversionType"]').forEach(radio => {
     });
 });
 
-document.querySelectorAll('input[name="conversionType"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-        const conversionType = document.querySelector('input[name="conversionType"]:checked').value;
-        const imageContainer = document.getElementById('imageContainer');
-        const fileInfo = document.getElementById('fileInfo');
-        const jsonOutput = document.getElementById('jsonOutput');
-        const jwtInput = document.getElementById('jwtInput');
-        const convertButton = document.getElementById('convertButton');
-        const backButton = document.getElementById('backButton');
-        const comparisonResult = document.getElementById('comparisonResult');
+document.addEventListener('DOMContentLoaded', () => {
+    const outputType = document.getElementById('outputType');
+    const conversionType = document.querySelector('input[name="conversionType"]:checked')?.value;
 
-        // ซ่อนการแสดงผลทั้งหมดก่อนการเลือกใหม่
-        if (imageContainer) imageContainer.style.display = 'none';
-        if (fileInfo) fileInfo.style.display = 'none';
-        if (comparisonResult) comparisonResult.style.display = 'none';
-        if (backButton) backButton.style.display = 'none';
-        if (convertButton) convertButton.style.display = 'inline';
+    // ซ่อน outputType ตอนเข้าเว็บครั้งแรก
+    if (outputType) {
+        outputType.style.display = 'none';
+    }
 
-        // กำหนดค่าเริ่มต้นสำหรับ jwtInput และ jsonOutput
-        jsonOutput.style.display = 'block';
-        jwtInput.style.display = 'block';
+    document.querySelectorAll('input[name="conversionType"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+            const conversionType = document.querySelector('input[name="conversionType"]:checked').value;
+            const imageContainer = document.getElementById('imageContainer');
+            const fileInfo = document.getElementById('fileInfo');
+            const jsonOutput = document.getElementById('jsonOutput');
+            const jwtInput = document.getElementById('jwtInput');
+            const convertButton = document.getElementById('convertButton');
+            const backButton = document.getElementById('backButton');
+            const comparisonResult = document.getElementById('comparisonResult');
 
-        // ตรวจสอบการเลือก radio
-        if (conversionType === '64toimg') {
-            // แสดง jwtInput และปุ่ม convert สำหรับ Base64 to Image
-            jsonOutput.style.display = 'none';
-            jwtInput.style.display = 'block';  // แสดง input field สำหรับ base64
-            handleBase64Conversion(jwtInput.value); // แปลง base64 ทันทีหากมีค่าใน jwtInput
-        } else if (conversionType === 'compareJson') {
-            // รีเซ็ทค่าเมื่อเลือก compareJson
-            jwtInput.value = '';
-            jsonOutput.value = '';
-            comparisonResult.style.display = 'none';
-            backButton.style.display = 'none';
-            // แสดง jwtInput และ jsonOutput พร้อมปุ่ม compare
+            // ซ่อนการแสดงผลทั้งหมดก่อนการเลือกใหม่
+            if (imageContainer) imageContainer.style.display = 'none';
+            if (fileInfo) fileInfo.style.display = 'none';
+            if (comparisonResult) comparisonResult.style.display = 'none';
+            if (backButton) backButton.style.display = 'none';
+            if (convertButton) convertButton.style.display = 'inline';
+
+            // กำหนดค่าเริ่มต้นสำหรับ jwtInput และ jsonOutput
             jsonOutput.style.display = 'block';
             jwtInput.style.display = 'block';
-        } else if (conversionType === 'jwtToJson' || conversionType === 'jsonToJwt') {
-            // แสดง jwtInput และ jsonOutput พร้อมปุ่ม convert สำหรับ JWT และ JSON conversion
-            jsonOutput.style.display = 'block';
-            jwtInput.style.display = 'block';
-            convertButton.style.display = 'inline';
-        }
 
-        // หากเลือก radio อื่นๆ ให้รีเซ็ทการแสดงผลของรูปภาพ
-        if (imageContainer) imageContainer.style.display = 'none';
-        if (fileInfo) fileInfo.style.display = 'none';
+            // ซ่อน outputType ก่อนที่ผู้ใช้เลือก
+            outputType.style.display = 'none';
+
+            // ตรวจสอบการเลือก radio
+            if (conversionType === '64toimg') {
+                // แสดง jwtInput และปุ่ม convert สำหรับ Base64 to Image
+                jsonOutput.style.display = 'none';
+                jwtInput.style.display = 'block';  // แสดง input field สำหรับ base64
+                handleBase64Conversion(jwtInput.value); // แปลง base64 ทันทีหากมีค่าใน jwtInput
+            } else if (conversionType === 'compareJson') {
+                // รีเซ็ทค่าเมื่อเลือก compareJson
+                jwtInput.value = '';
+                jsonOutput.value = '';
+                comparisonResult.style.display = 'none';
+                backButton.style.display = 'none';
+                // แสดง jwtInput และ jsonOutput พร้อมปุ่ม compare
+                jsonOutput.style.display = 'block';
+                jwtInput.style.display = 'block';
+            } else if (conversionType === 'jwtToJson' || conversionType === 'jsonToJwt') {
+                // แสดง jwtInput และ jsonOutput พร้อมปุ่ม convert สำหรับ JWT และ JSON conversion
+                outputType.style.display = 'none';
+                jsonOutput.style.display = 'block';
+                jwtInput.style.display = 'block';
+                convertButton.style.display = 'inline';
+            } else if (conversionType === 'hextofile') {
+                // แสดง outputType และซ่อน jsonOutput เมื่อเลือก hextofile
+                outputType.style.display = 'block';
+                jsonOutput.style.display = 'none';
+                jwtInput.style.display = 'block';
+                convertButton.style.display = 'inline';
+            }
+
+            // หากเลือก radio อื่นๆ ให้รีเซ็ทการแสดงผลของรูปภาพ
+            if (imageContainer) imageContainer.style.display = 'none';
+            if (fileInfo) fileInfo.style.display = 'none';
+        });
     });
 });
+
+
 
 // ฟังก์ชันย้อนกลับ (เมื่อกดปุ่ม back)
 function goBack() {
