@@ -527,6 +527,39 @@ label {
     color: var(--second-text-color);
 }
 
+/* ปรับแต่ง dropdown */
+#outputType {
+    background-color: #f0f0f0;  /* สีพื้นหลัง */
+    margin-bottom: 10px;
+    border: 1px solid #ccc;     /* เส้นขอบ */
+    border-radius: 5px;         /* มุมโค้ง */
+    padding: 8px 12px;          /* ระยะห่างภายใน */
+    font-size: 16px;            /* ขนาดตัวอักษร */
+    color: #333;                /* สีตัวอักษร */
+    appearance: none;           /* ยกเลิกดีไซน์พื้นฐานของเบราว์เซอร์ */
+    width: 200px;               /* กำหนดความกว้าง */
+    cursor: pointer;           /* เปลี่ยนเคอร์เซอร์เป็น pointer เมื่อ hover */
+}
+
+/* ปรับแต่งเมื่อ hover บน dropdown */
+#outputType:hover {
+    border-color: #888;  /* เปลี่ยนสีเส้นขอบเมื่อ hover */
+}
+
+/* ปรับแต่งสำหรับ option */
+#outputType option {
+    background-color: #fff;  /* สีพื้นหลังของ option */
+    color: #333;             /* สีตัวอักษรของ option */
+    padding: 10px;           /* ระยะห่างภายในแต่ละ option */
+}
+
+/* ปรับแต่งเมื่อเลือก option */
+#outputType:focus {
+    border-color: #007BFF;  /* สีเส้นขอบเมื่อ dropdown อยู่ในโฟกัส */
+    outline: none;          /* เอาเส้น outline ออก */
+}
+
+
 #generateButton,#yearsum {
     font-size: 16px; /* ขนาดตัวอักษรของปุ่ม */
     padding: 2px 12px;
