@@ -93,7 +93,7 @@ document.querySelectorAll('.tab-link').forEach(function(link) {
 
 
 (function (ai) {
-    const apiKey = '906f0a2a3c854039af0265b8b2e7e029'; // แทนที่ด้วย API Key ของคุณ
+    const apiKey = 'sk-906f0a2a3c854039af0265b8b2e7e029'; // แทนที่ด้วย API Key ของคุณ
     const chatBox = document.getElementById('chat-box');
     const userInput = document.getElementById('user-input');
     const sendButton = document.getElementById('send-button');
