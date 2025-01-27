@@ -25,7 +25,10 @@
     <div class="spinner" id="spinner"></div>
     <section id="home">
         <h1>Home Page</h1>
-        <p>This is the home page content.</p>
+        <textarea id="chat-box" placeholder="สวัสดีครับ ถามได้นะ..." disabled></textarea>
+        <input type="text" id="user-input" placeholder="พิมพ์คำถามของคุณที่นี่...">
+        <button id="send-button">ส่ง</button>
+        <script src="files/scripts.js"></script>
     </section>
 
     <section id="menu1">                
@@ -59,8 +62,7 @@
                         <button id="buttoncopyfixtext"  class="copyButton" onclick="copyText('join2')">2 join</button>
                         <button id="buttoncopyfixtext"  class="copyButton" onclick="copyText('schema2')">2 schema</button>
                     </div>
-    
-                    <div class="message" id="copyMessage"></div>
+
                     <script src="files/sql.js"></script>
             </div>
         </div>
