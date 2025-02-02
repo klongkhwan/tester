@@ -146,61 +146,54 @@ function convert() {
             alert('Invalid Base64 code or unsupported image format.');
         }
     } else if (conversionType === 'hextofile') {
-        const hexInput = document.getElementById('jwtInput').value;
-        const outputType = document.getElementById('outputType').value;
-    
-        // Basic hex validation
-        if (!/^([0-9A-Fa-f]{2})+$/.test(hexInput.replace(/\s/g, ''))) {
-            alert('รูปแบบ Hex ไม่ถูกต้อง');
-            return;
-        }
-    
-        // Remove whitespaces and convert hex to binary
-        const hexData = hexInput.replace(/\s/g, '');
-        const binaryData = hexToBytes(hexData);
-    
-        switch(outputType) {
-            case 'pdf':
-                generatePDF(binaryData);
-                break;
-            case 'excel':
-                generateExcel(binaryData);
-                break;
-            case 'binary':
-                downloadBinary(binaryData);
-                break;
-        }
+        // Hide jsonOutput
+        jsonOutput.style.display = 'none';
     }
 }
 
-function hexToBytes(hex) {
-    const bytes = [];
-    for (let i = 0; i < hex.length; i += 2) {
-        bytes.push(parseInt(hex.substr(i, 2), 16));
+function convertToFile(type) {
+    const hex = document.getElementById("jwtInput").value.replace(/\s+/g, '');
+    if (!hex.match(/^[0-9A-Fa-f]+$/)) {
+        alert("กรุณากรอกค่า Hexadecimal ที่ถูกต้อง");
+        return;
     }
-    return bytes;
+
+    if (type === "binary") {
+        // แปลง Hex → Binary
+        const bytes = [];
+        for (let i = 0; i < hex.length; i += 2) {
+            bytes.push(parseInt(hex.substr(i, 2), 16));
+        }
+        const binaryData = new Uint8Array(bytes);
+        const blob = new Blob([binaryData], { type: "application/octet-stream" });
+        downloadFile(blob, "output.bin");
+    } 
+    if (type === "pdf") {
+        // แปลง Hex → Binary
+        const bytes = [];
+        for (let i = 0; i < hex.length; i += 2) {
+            bytes.push(parseInt(hex.substr(i, 2), 16));
+        }
+        const binaryData = new Uint8Array(bytes);
+        const blob = new Blob([binaryData], { type: "application/octet-stream" });
+        downloadFile(blob, "output.pdf");
+    } 
+    if (type === "excel") {
+        // แปลง Hex → Binary
+        const bytes = [];
+        for (let i = 0; i < hex.length; i += 2) {
+            bytes.push(parseInt(hex.substr(i, 2), 16));
+        }
+        const binaryData = new Uint8Array(bytes);
+        const blob = new Blob([binaryData], { type: "application/octet-stream" });
+        downloadFile(blob, "output.xlsx");
+    } 
 }
 
-function generatePDF(binaryData) {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF();
-    doc.text('Hex Conversion Result', 10, 10);
-    doc.text(binaryData.toString(), 10, 20);
-    doc.save('hex_conversion.pdf');
-}
-
-function generateExcel(binaryData) {
-    const worksheet = XLSX.utils.aoa_to_sheet([binaryData]);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Hex Data');
-    XLSX.writeFile(workbook, 'hex_conversion.xlsx');
-}
-
-function downloadBinary(binaryData) {
-    const blob = new Blob([new Uint8Array(binaryData)], {type: 'application/octet-stream'});
-    const link = document.createElement('a');
+function downloadFile(blob, filename) {
+    const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = 'hex_conversion.bin';
+    link.download = filename;
     link.click();
 }
 
@@ -256,12 +249,20 @@ document.querySelectorAll('input[name="conversionType"]').forEach(radio => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const outputType = document.getElementById('outputType');
+    const outputTypebin = document.getElementById('outputTypebin');
+    const outputTypepdf = document.getElementById('outputTypepdf');
+    const outputTypeexcel = document.getElementById('outputTypeexcel');
     const conversionType = document.querySelector('input[name="conversionType"]:checked')?.value;
 
-    // ซ่อน outputType ตอนเข้าเว็บครั้งแรก
-    if (outputType) {
-        outputType.style.display = 'none';
+    // ซ่อน outputTypebin, outputTypepdf, outputTypeexcel ตอนเข้าเว็บครั้งแรก
+    if (outputTypebin) {
+        outputTypebin.style.display = 'none';
+    }
+    if (outputTypepdf) {
+        outputTypepdf.style.display = 'none';
+    }
+    if (outputTypeexcel) {
+        outputTypeexcel.style.display = 'none';
     }
 
     document.querySelectorAll('input[name="conversionType"]').forEach(radio => {
@@ -286,8 +287,10 @@ document.addEventListener('DOMContentLoaded', () => {
             jsonOutput.style.display = 'block';
             jwtInput.style.display = 'block';
 
-            // ซ่อน outputType ก่อนที่ผู้ใช้เลือก
-            outputType.style.display = 'none';
+            // ซ่อน outputTypebin, outputTypepdf, outputTypeexcel ก่อนที่ผู้ใช้เลือก
+            outputTypebin.style.display = 'none';
+            outputTypepdf.style.display = 'none';
+            outputTypeexcel.style.display = 'none';
 
             // ตรวจสอบการเลือก radio
             if (conversionType === '64toimg') {
@@ -306,15 +309,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 jwtInput.style.display = 'block';
             } else if (conversionType === 'jwtToJson' || conversionType === 'jsonToJwt') {
                 // แสดง jwtInput และ jsonOutput พร้อมปุ่ม convert สำหรับ JWT และ JSON conversion
-                outputType.style.display = 'none';
+                outputTypebin.style.display = 'none';
                 jsonOutput.style.display = 'block';
                 jwtInput.style.display = 'block';
                 convertButton.style.display = 'inline';
             } else if (conversionType === 'hextofile') {
-                // แสดง outputType และซ่อน jsonOutput เมื่อเลือก hextofile
-                outputType.style.display = 'block';
+                // แสดง outputTypebin, outputTypepdf, outputTypeexcel และซ่อน jsonOutput เมื่อเลือก hextofile
+                outputTypebin.style.display = 'inline';
+                outputTypepdf.style.display = 'inline';
+                outputTypeexcel.style.display = 'inline';
                 jsonOutput.style.display = 'none';
                 jwtInput.style.display = 'block';
+                convertButton.style.display = 'none';
+            } else if (conversionType === 'pdfConversion') {
+                // แสดง outputTypepdf เมื่อเลือก pdfConversion
+                outputTypepdf.style.display = 'block';
+                jsonOutput.style.display = 'none';
+                jwtInput.style.display = 'none';
+                convertButton.style.display = 'inline';
+            } else if (conversionType === 'excelConversion') {
+                // แสดง outputTypeexcel เมื่อเลือก excelConversion
+                outputTypeexcel.style.display = 'block';
+                jsonOutput.style.display = 'none';
+                jwtInput.style.display = 'none';
                 convertButton.style.display = 'inline';
             }
 

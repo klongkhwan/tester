@@ -92,58 +92,30 @@ document.querySelectorAll('.tab-link').forEach(function(link) {
 });
 
 
-(function (ai) {
-    const apiKey = 'sk-906f0a2a3c854039af0265b8b2e7e029'; // แทนที่ด้วย API Key ของคุณ
-    const chatBox = document.getElementById('chat-box');
-    const userInput = document.getElementById('user-input');
-    const sendButton = document.getElementById('send-button');
+async function sendMessage() {
+    const message = userInput.value.trim();
+    if (!message) return;
 
-    // ฟังก์ชันส่งคำถามไปยัง DeepSeek API
-    async function sendMessage() {
-        const message = userInput.value.trim();
-        if (!message) return;
+    chatBox.value += `คุณ: ${message}\n`;
+    userInput.value = '';
 
-        // แสดงคำถามของผู้ใช้ใน chat-box
-        chatBox.value += `คุณ: ${message}\n`;
-        userInput.value = '';
+    try {
+        const response = await fetch('https://dear-magical-meadow.glitch.me/proxy/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                prompt: message,
+                max_tokens: 150
+            })
+        });
 
-        try {
-            // ส่งคำถามไปยัง DeepSeek API
-            const response = await fetch('https://api.deepseek.com/v1/chat', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`
-                },
-                body: JSON.stringify({
-                    prompt: message,
-                    max_tokens: 150
-                })
-            });
-
-            // ตรวจสอบสถานะการตอบกลับ
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
-            const reply = data.choices[0].text.trim();
-
-            // แสดงคำตอบจาก DeepSeek ใน chat-box
-            chatBox.value += `DeepSeek: ${reply}\n`;
-        } catch (error) {
-            console.error('เกิดข้อผิดพลาด:', error);
-            chatBox.value += `ข้อผิดพลาด: ${error.message}\n`;
-        }
+        const data = await response.json();
+        const reply = data.choices[0].text.trim();
+        chatBox.value += `DeepSeek: ${reply}\n`;
+    } catch (error) {
+        console.error('เกิดข้อผิดพลาด:', error);
+        chatBox.value += `ข้อผิดพลาด: ${error.message}\n`;
     }
-
-    // เรียกฟังก์ชันเมื่อผู้ใช้กดปุ่มส่ง
-    sendButton.addEventListener('click', sendMessage);
-
-    // เรียกฟังก์ชันเมื่อผู้ใช้กด Enter ในช่อง input
-    userInput.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            sendMessage();
-        }
-    });
-})();
+}
