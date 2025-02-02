@@ -7,6 +7,9 @@
     <link rel="icon" href="css/favicon-16x16.png" type="image/png">
     <script src="files/scripts.js"></script>  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
     <title>3CAT</title>
     <link rel="stylesheet" href="css/styles.css">
     
@@ -23,12 +26,27 @@
         </ul>
     </nav>
     <div class="spinner" id="spinner"></div>
-<!--     <section id="home">
+    <section id="home">
         <h1>Home Page</h1>
-        <textarea id="chat-box" placeholder="สวัสดีครับ ถามได้นะ..." disabled></textarea>
-        <input type="text" id="user-input" placeholder="พิมพ์คำถามของคุณที่นี่...">
-        <button id="send-button">ส่ง</button>
-        <script src="files/scripts.js"></script> -->
+        <!-- <h3>Welcome</h3> -->
+        <div style="text-align: center;">
+
+        <label style="text-align: center;" for="language-select">Choose Language : </label>
+        <select id="language-select">
+            <option value="thai">ไทย</option>
+            <option value="english">English</option>
+        </select>
+        <button id="startgame" onclick="startGame()">Start</button>
+        
+        <div id="game-container" style="display:none;"><div id="result" style="display:none; "></div></div>
+        <input type="text" id="input-box" placeholder="Type here..." disabled 
+       style="display: block; text-align: center;  margin-left: auto; margin-right: auto; width: 50%;">
+
+        <div id="stats" style=" margin-top: 20px;">Time: <span id="time" >60</span>s <span id="speed" style="display:none;"></span><span id="accuracy" style="display:none;"></span></div>
+        <div id="resultgame" style="display:none; "></div>
+        <audio id="correct-sound" src="https://www.myinstants.com/media/sounds/correct.mp3"></audio>
+        <script src="files/game.js"></script>
+        </div>
     </section>
 
     <section id="menu1">                
@@ -140,6 +158,7 @@
                     <button id="buttoncopyfixtext"  class="copyButton" data-key="50"></i> 50 <i class="fas fa-copy"></i></button>
                     <button id="buttoncopyfixtext"  class="copyButton" data-key="100"></i> 100 <i class="fas fa-copy"></i></button>
                     <button id="buttoncopyfixtext"  class="copyButton" data-key="255"></i> 255 <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="500"></i> 500 <i class="fas fa-copy"></i></button>
                     <button id="buttoncopyfixtext"  class="copyButton" data-key=">10"></i> >10 <i class="fas fa-copy"></i></button>
                     <button id="buttoncopyfixtext"  class="copyButton" data-key=">50"></i> >50 <i class="fas fa-copy"></i></button>
                     <button id="buttoncopyfixtext"  class="copyButton" data-key=">100"></i> >100 <i class="fas fa-copy"></i></button>
@@ -224,11 +243,9 @@
                         <textarea id="jwtInput" placeholder="Paste your Token here..."></textarea>
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-                        <select id="outputType">
-                            <option value="pdf">PDF</option>
-                            <option value="excel">Excel</option>
-                            <option value="binary">Binary</option>
-                        </select>
+                        <button id="outputTypebin"  onclick="convertToFile('binary')">Convert Binary</button>
+                        <button id="outputTypepdf"  onclick="convertToFile('pdf')">Convert PDF</button>
+                        <button id="outputTypeexcel" onclick="convertToFile('excel')">Convert Excel</button>
                         <button type="button" id="convertButton"  onclick="convert()">Convert</button>
                         <textarea id="jsonOutput"  placeholder="Converted JSON will appear here..." ></textarea>
                         <!-- แสดงผลลัพธ์ความแตกต่าง -->
