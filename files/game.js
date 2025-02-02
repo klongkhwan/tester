@@ -1,5 +1,5 @@
   const englishWords = [
-    "scenario", "retest", "bugapi", "Database ", "fixbug", "deploy", "deploy", "response", "module", "prototype", 
+    "scenario", "retest", "bugapi", "database ", "fixbug", "deploy", "deploy", "response", "module", "prototype", 
     "script", "push", "pull", "feature", "compiler", "fullflow", "build", "clone", "task", "commit", 
     "merge", "release", "security ", "stack", "error", "logic", "case", "verify", "syntax", "release", 
     "output", "optimize", "review", "sprint", "codebase", "design", "analyze", "recheck", "devops", 
