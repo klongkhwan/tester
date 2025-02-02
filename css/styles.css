@@ -405,6 +405,29 @@ button:hover {
     color: green;
 }
 
+#game-container {
+    margin-top: 20px;
+    position: relative;
+    width: 700px;
+    height: 300px;
+    margin: auto;
+    overflow: hidden;
+    border: 2px solid #333;
+    background-color: white;
+}
+.word {
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    transition: transform 0.3s ease-in-out;
+}
+#input-box {
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 18px;
+}
+
 #buttoncopyfixtext {
     background-color: var(--black-color); /* สีพื้นหลังของปุ่ม */
     border: none; /* ไม่มีขอบ */
@@ -528,12 +551,12 @@ label {
 }
 
 /* ปรับแต่ง dropdown */
-#outputType {
+#language-select {
     background-color: #f0f0f0;  /* สีพื้นหลัง */
     margin-bottom: 10px;
     border: 1px solid #ccc;     /* เส้นขอบ */
     border-radius: 5px;         /* มุมโค้ง */
-    padding: 8px 12px;          /* ระยะห่างภายใน */
+    padding: 9px 12px;          /* ระยะห่างภายใน */
     font-size: 16px;            /* ขนาดตัวอักษร */
     color: #333;                /* สีตัวอักษร */
     appearance: none;           /* ยกเลิกดีไซน์พื้นฐานของเบราว์เซอร์ */
@@ -542,19 +565,19 @@ label {
 }
 
 /* ปรับแต่งเมื่อ hover บน dropdown */
-#outputType:hover {
+#language-select :hover {
     border-color: #888;  /* เปลี่ยนสีเส้นขอบเมื่อ hover */
 }
 
 /* ปรับแต่งสำหรับ option */
-#outputType option {
+#language-select  option {
     background-color: #fff;  /* สีพื้นหลังของ option */
     color: #333;             /* สีตัวอักษรของ option */
     padding: 10px;           /* ระยะห่างภายในแต่ละ option */
 }
 
 /* ปรับแต่งเมื่อเลือก option */
-#outputType:focus {
+#language-select :focus {
     border-color: #007BFF;  /* สีเส้นขอบเมื่อ dropdown อยู่ในโฟกัส */
     outline: none;          /* เอาเส้น outline ออก */
 }
@@ -599,6 +622,7 @@ label {
     min-width: 300px; /* ความกว้างต่ำสุดของรูปภาพ */
     height: auto; /* ให้ความสูงของภาพปรับตามอัตราส่วน */
   }
+
 
 /* ซ่อน input type radio ดั้งเดิม */
 .custom-radio input[type="radio"] {
@@ -655,7 +679,13 @@ label {
     background-color: #fff;
     border-color: #ccc;
 }
-  
+
+#user-input {
+    width: 90%;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
 
 textarea, #jwtInput {
     background-color: #f5f3f3; /* เพิ่มพื้นหลังสีเทาอ่อน */
