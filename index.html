@@ -93,7 +93,7 @@
             <ul class="tabs">
                 <li class="tab-link active" data-tab="random">สุ่มทุกอย่าง</li>
                 <li class="tab-link" data-tab="Count">นับตัวอักษร</li>
-                <li class="tab-link" data-tab="date">วันที่และเวลา</li>
+                <li class="tab-link" data-tab="date">คำนวณ</li>
                 <li class="tab-link" data-tab="convert">แปลงค่า</li>
             </ul>
         
@@ -179,23 +179,23 @@
                 <script src="files/text.js"></script>
             </div>
             <div id="date" class="tab-content">
-                <h1>วันที่และเวลา</h1>
+                <h1>คำนวณ</h1>
                         <h3>คำนวณวันเกิดจากอายุ</h3>
                         <div class="yearconvert">
                             <form id="ageForm">
                                 <label for="years">ปี:</label>
-                                <input type="number" id="inputyears" name="years" min="0" max="100" required>
+                                <input type="number" id="inputyears" placeholder="ปี" name="years" min="0" max="100" required>
                                 <br>
                                 <label for="months">เดือน:</label>
-                                <input type="number" id="inputmonths" name="months" min="0" max="11" required>
+                                <input type="number" id="inputmonths" placeholder="เดือน" name="months" min="0" max="11" required>
                                 <br>
                                 <label for="days">วัน:</label>
-                                <input type="number" id="inputdays" name="days" min="0" max="30" required>
+                                <input type="number" id="inputdays" placeholder="วัน" name="days" min="0" max="30" required>
                             </form>
                             <p id="resultyear"></p>
                         </div>            
                         <h3>แปลงวันและเวลา</h3>
-                        <label class="custom-radio"><input type="radio" name="timeFormat" value="format1" checked> รูปแบบ 1<span class="radio-checkmark"></span></label>
+                        <label class="custom-radio"><input type="radio" name="timeFormat"  value="format1" checked> รูปแบบ 1<span class="radio-checkmark"></span></label>
                         <label class="custom-radio"><input type="radio" name="timeFormat" value="format2"> รูปแบบ 2 <span class="radio-checkmark"></span></label>
                         <label class="custom-radio"><input type="radio" name="timeFormat" value="format3"> รูปแบบ 3 <span class="radio-checkmark"></span></label>
                         <br>
@@ -206,6 +206,21 @@
                         <p id="resultconvertdate"></p>
                         <input type="hidden" id="hiddenDateInput">
                         </div>
+                        <h3>คำนวณ BMI</h3>
+                        <div class="bmiconvert">
+                            <form id="bmiForm">
+                                <label>น้ำหนัก (กก.) :</label>
+                                <input type="text" id="inputweight" placeholder="ระบุน้ำหนัก" required oninput="validateInputbmi(this); calculateBMI();">
+                                <label>ส่วนสูง (ซม.) :</label>
+                                <input type="text" id="inputheight" placeholder="ระบุส่วนสูง" required oninput="validateInputbmi(this); calculateBMI();">
+                                <br>
+                
+                            </form>
+                            <p id="resultbmi"></p>
+                        </div>       
+                        
+                        
+                        
                         <div class="message" id="copyMessagecookie"></div>
                 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
                 <script src="files/datetime.js"></script>    
