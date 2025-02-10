@@ -378,7 +378,7 @@ button:hover {
 }
 
 
-#resultcard, #resultname, #resultphone,#resultconvertdate,#resultcookie,#resultyear {
+#resultcard, #resultname, #resultphone,#resultconvertdate,#resultcookie,#resultyear,#resultbmi {
     margin-top: 5px;
     font-size: 1.2em;
     color: #650194;
@@ -718,10 +718,9 @@ textarea, #jwtInput {
     border-radius: 5px; /* เพิ่มการโค้งมนที่ขอบ */
 }
 
-#charCountInput,#inputyears,#inputmonths,#inputdays {
+#charCountInput,#inputyears,#inputmonths,#inputdays,#inputweight,#inputheight {
     text-align: center;
-    width: 80px; /* กำหนดความกว้าง */
-    height: 10px; /* กำหนดความสูง */
+    width: 100px; /* กำหนดความกว้าง */
     padding: 5px; /* เพิ่ม padding */
     font-size: 16px; /* ขนาดฟอนต์ */
     border: 1px solid #cccccc77; /* สีขอบ */
@@ -729,15 +728,48 @@ textarea, #jwtInput {
 }
 
 /* ปรับสีพื้นหลังและสีอักษร */
-#charCountInput,#inputyears,#inputmonths,#inputdays  {
+#charCountInput,#inputyears,#inputmonths,#inputdays,#inputweight,#inputheight  {
     background-color: #f7f1f1; /* สีพื้นหลัง */
     color:var(--primary-color);
 }
 
+.bmiconvert {
+    border-radius: 10px;
+    color: white; /* Text color for good contrast */
+    width: 500px; /* Adjust the width as per your design */
+}
+
+.bmiconvert input[type="text"] {
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #333;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+}
+
+.bmiconvert label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+#bmiForm{
+    display: flex;
+    font-family: 'Prompt', sans-serif; /* กำหนดฟ้อนต์ใหม่ */
+    font-size: 16px; /* กำหนดขนาดฟ้อนต์ */
+    line-height: 1.5; /* กำหนดความสูงบรรทัด */
+    color: #020000;
+    font-weight: bold;
+    gap: 10px; /* ปรับระยะห่างระหว่างช่องป้อนข้อมูล */
+    flex-direction:row;
+
+}
+
+
 .yearconvert {
     border-radius: 10px;
     color: white; /* Text color for good contrast */
-    width: 200px; /* Adjust the width as per your design */
+    width: 300px; /* Adjust the width as per your design */
 }
 
 .yearconvert h3 {
