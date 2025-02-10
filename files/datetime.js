@@ -1,51 +1,44 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const timeInput = document.getElementById('timeInput');
-    const clearButton = document.getElementById('clearvalue');
-    const calendarButton = document.getElementById('calendarButton');
-    const resultConvertDate = document.getElementById('resultconvertdate');
-    const hiddenDateInput = document.getElementById('hiddenDateInput');
+document.addEventListener('DOMContentLoaded', function () {
+    const inputYears = document.getElementById('inputyears');
+    const inputMonths = document.getElementById('inputmonths');
+    const inputDays = document.getElementById('inputdays');
+    const resultYear = document.getElementById('resultyear');
 
-    // Initialize Flatpickr
-    flatpickr(hiddenDateInput, {
-        dateFormat: "Y-m-d H:i:S",
-        enableTime: true,
-        noCalendar: false,
-        enableSeconds: true,
-        defaultDate: new Date(),
-        position: 'below',
-        onChange: function(selectedDates, dateStr, instance) {
-            const date = selectedDates[0];
-            if (date) {
-                const formattedDate = formatDateToYYYYMMDDHHMMSS(date);
-                resultConvertDate.textContent = formattedDate;
-            }
+    function calculateBirthDate() {
+        const currentDate = new Date(); // วันที่ปัจจุบัน
+        let birthDate = new Date(currentDate); // เริ่มจากวันที่ปัจจุบัน
+
+        // ดึงค่าที่ผู้ใช้กรอก (ถ้าไม่มีให้ใช้ 0)
+        const ageYears = parseInt(inputYears.value) || 0;
+        const ageMonths = parseInt(inputMonths.value) || 0;
+        const ageDays = parseInt(inputDays.value) || 0;
+
+        // ลบอายุออกจากวันที่ปัจจุบัน
+        birthDate.setFullYear(birthDate.getFullYear() - ageYears);
+        birthDate.setMonth(birthDate.getMonth() - ageMonths);
+        birthDate.setDate(birthDate.getDate() - ageDays);
+
+        // คำนวณปี ค.ศ. และ พ.ศ.
+        const birthYearAD = birthDate.getFullYear(); // ค.ศ.
+        const birthYearBE = birthYearAD + 543; // พ.ศ.
+        const birthMonth = String(birthDate.getMonth() + 1).padStart(2, '0'); // เดือน (01-12)
+        const birthDay = String(birthDate.getDate()).padStart(2, '0'); // วัน (01-31)
+
+        // ตรวจสอบว่ามีค่าที่ถูกกรอกหรือไม่
+        if (ageYears > 0 || ageMonths > 0 || ageDays > 0) {
+            resultYear.textContent = `ปีเกิด ${birthDay}/${birthMonth}/${birthYearBE} หรือ ${birthYearAD}`;
+        } else {
+            resultYear.textContent = "กรุณากรอกอายุ (ปี, เดือน หรือ วัน อย่างน้อย 1 ค่า)";
         }
-    });
-
-    // Open the calendar on button click
-    calendarButton.addEventListener('click', function() {
-        hiddenDateInput._flatpickr.open();
-    });
-
-    // Clear input and result
-    clearButton.addEventListener('click', function() {
-        timeInput.value = '';
-        resultConvertDate.textContent = '';
-        hiddenDateInput._flatpickr.clear();
-    });
-
-    // Function to format date to YYYYMMDDHHMMSS
-    function formatDateToYYYYMMDDHHMMSS(date) {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        const hours = String(date.getHours()).padStart(2, '0');
-        const minutes = String(date.getMinutes()).padStart(2, '0');
-        const seconds = String(date.getSeconds()).padStart(2, '0');
-        
-        return `${year}${month}${day}${hours}${minutes}${seconds}`;
     }
+
+    // Event listener ให้คำนวณเมื่อมีการป้อนค่า
+    inputYears.addEventListener('input', calculateBirthDate);
+    inputMonths.addEventListener('input', calculateBirthDate);
+    inputDays.addEventListener('input', calculateBirthDate);
 });
+
+
 
 // ฟังก์ชันสำหรับการเปลี่ยน maxlength ตามรูปแบบที่เลือก
 document.querySelectorAll('input[name="timeFormat"]').forEach(function(radio) {
@@ -182,3 +175,45 @@ function calculateDate() {
 document.getElementById('inputyears').addEventListener('input', calculateDate);
 document.getElementById('inputmonths').addEventListener('input', calculateDate);
 document.getElementById('inputdays').addEventListener('input', calculateDate);
+
+// BMI
+function validateInputbmi(input) {
+    input.value = input.value.replace(/[^0-9.]/g, ""); // อนุญาตเฉพาะตัวเลขและจุดทศนิยม
+    let parts = input.value.split(".");
+    if (parts.length > 2) {
+        input.value = parts[0] + "." + parts[1]; // จำกัดจุดทศนิยมให้มีได้เพียงจุดเดียว
+    }
+    if (parts[0].length > 3) {
+        input.value = parts[0].slice(0, 3) + (parts[1] ? "." + parts[1] : ""); // จำกัดให้มีเลขไม่เกิน 3 หลักก่อนทศนิยม
+    }
+    if (parts[1] && parts[1].length > 1) {
+        input.value = parts[0] + "." + parts[1].slice(0, 1); // จำกัดทศนิยมให้มีแค่ 1 ตำแหน่ง
+    }
+}
+
+function calculateBMI() {
+    let weight = parseFloat(document.getElementById("inputweight").value);
+    let height = parseFloat(document.getElementById("inputheight").value) / 100; // แปลงเป็นเมตร
+    
+    if (!weight || !height) {
+        document.getElementById("resultbmi").innerHTML = "";
+        return;
+    }
+    
+    let bmi = weight / (height * height);
+    let category = "";
+    
+    if (bmi >= 30.0) {
+        category = "อ้วนมาก";
+    } else if (bmi >= 25.0) {
+        category = "อ้วน";
+    } else if (bmi >= 23.0) {
+        category = "น้ำหนักเกิน";
+    } else if (bmi >= 18.6) {
+        category = "น้ำหนักปกติ เหมาะสม";
+    } else {
+        category = "ผอมเกินไป";
+    }
+    
+    document.getElementById("resultbmi").innerHTML = `BMI : ${bmi.toFixed(1)} (${category})`;
+}
