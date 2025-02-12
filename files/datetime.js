@@ -6,17 +6,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function calculateBirthDate() {
         const currentDate = new Date(); // วันที่ปัจจุบัน
-        let birthDate = new Date(currentDate); // เริ่มจากวันที่ปัจจุบัน
+        let birthDate = new Date(currentDate); // คัดลอกวันที่ปัจจุบันมาใช้
 
         // ดึงค่าที่ผู้ใช้กรอก (ถ้าไม่มีให้ใช้ 0)
         const ageYears = parseInt(inputYears.value) || 0;
         const ageMonths = parseInt(inputMonths.value) || 0;
         const ageDays = parseInt(inputDays.value) || 0;
 
-        // ลบอายุออกจากวันที่ปัจจุบัน
+        // ลบอายุปีออกจากวันที่ปัจจุบัน
         birthDate.setFullYear(birthDate.getFullYear() - ageYears);
+
+        // ลบอายุเดือน (ถ้าเกินขอบเขตของเดือนจะถูกปรับอัตโนมัติ)
         birthDate.setMonth(birthDate.getMonth() - ageMonths);
+
+        // ลบอายุวัน
         birthDate.setDate(birthDate.getDate() - ageDays);
+
+        // ปรับวันที่ในกรณีที่ลบแล้ววันที่เกินขอบเขตของเดือน
+        if (birthDate.getDate() !== (currentDate.getDate() - ageDays)) {
+            birthDate.setDate(0); // กลับไปวันสุดท้ายของเดือนก่อนหน้า
+        }
 
         // คำนวณปี ค.ศ. และ พ.ศ.
         const birthYearAD = birthDate.getFullYear(); // ค.ศ.
