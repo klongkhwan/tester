@@ -3,6 +3,8 @@
     --second-color: #0a2d33;	
     --black-color: #0c262e;
     --button-bg-color: #03852a; 
+    --bg-gradient-start: #2d1e4e; /* สีม่วงเข้ม */
+    --bg-gradient-end: #191631;   /* สีม่วงน้ำเงินเข้ม */
   }
 
 
@@ -12,14 +14,14 @@ body {
     line-height: 1.5; /* กำหนดความสูงบรรทัด */
     color: #020000;
     font-weight: bold;
-    background: #efe5f5; 
+    background: linear-gradient(90deg, var(--bg-gradient-start), var(--bg-gradient-end));
     background-size: cover;
     margin: 0;
     padding: 0;
 }
 
 nav {
-    background: linear-gradient(90deg, #3c2c55, #2c1a3d); /* เพิ่ม gradient */
+    background: linear-gradient(90deg, #44365c, #473458); /* เพิ่ม gradient */
     padding: 10px;
     height: 50px; /* เพิ่มความสูงเล็กน้อย */
     display: flex;
@@ -91,6 +93,89 @@ ul li ul li a:hover {
     background: rgba(255, 255, 255, 0.2); /* เปลี่ยนสีเมื่อ hover */
 }
 
+.container {
+            display: flex;
+            gap: 20px;
+        }
+
+.column {
+            flex: 1;
+            padding: 20px;
+            border-radius: 8px;
+            background: linear-gradient(135deg,rgb(224, 220, 241), rgb(210, 200, 243));
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            /* เปลี่ยนมาใช้ box-shadow สร้าง "ขอบ" แทน border */
+            box-shadow:
+                /* เงาชั้นใน (inner shadow) สร้างเอฟเฟกต์เหมือนแสงสะท้อนจากขอบด้านใน */
+                inset 0 0 0 1px rgba(255, 255, 255, 0.7), /* แสงสว่างด้านใน */
+                inset 0 0 0 2px rgba(0, 0, 0, 0.05),   /* เงาอ่อนๆ ด้านใน */
+                /* เงาหลักที่ยกองค์ประกอบขึ้นมา */
+                0 8px 20px rgba(0, 0, 0, 0.1),
+                0 3px 6px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease-in-out;
+            
+}
+
+
+        
+.result-box {
+            margin-top: 10px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            min-height: 10px;
+            cursor: pointer;
+}
+.copy-message {
+            color: green;
+            font-size: 0.8rem;
+            display: none;
+            margin-top: 5px;
+}
+
+.section {
+            margin-bottom: 10px;
+}
+
+.copy-message {
+            color: green;
+            font-size: 0.8rem;
+            display: none;
+            margin-top: 5px;
+        }        
+
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    font-family: Arial, sans-serif;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+
 
 .tab-container {
     width: 100%;
@@ -146,12 +231,14 @@ ul li ul li a:hover {
 }
 
 
+
+
 section {
     display: none;
-    max-width: 800px;
+    max-width: 900px;
     margin: 20px auto;
     padding: 30px;
-    background: linear-gradient(135deg, rgb(225, 213, 248), rgb(195, 177, 241));
+    background: linear-gradient(135deg, rgb(180, 163, 214), rgb(173, 149, 235));
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     -webkit-backdrop-filter: blur(8px);
@@ -206,6 +293,76 @@ h3 {
     margin-top: 10px;
 }
 
+.card-container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .cardgame {
+    background: linear-gradient(145deg, #c33fdd, #74146f);
+    color: white;
+    font-size: 1.2rem;
+    padding: 20px;
+    border-radius: 12px;
+    width: 180px;
+    height: 50px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border 0.3s ease;
+  }
+  
+  .cardgame:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(145deg, #ae00ff, #ceb4cd);
+  }
+  
+  .cardgame.selected {
+    border: 4px solid #06f3b8; /* ขอบสีน้ำเงินเมื่อเลือก */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .game {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    width: 93%;
+    max-width: 890px;
+    text-align: center;
+    display: none;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  /* Animation for game content fade-in */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .selected-game {
+    font-size: 1.5rem;
+    color: #333;
+    margin-top: 20px;
+    font-weight: bold;
+    transition: opacity 0.3s ease;
+  }
+  
+  .selected-game:hover {
+    opacity: 0.8;
+  }
 
 
 /* กล่องควบคุม */
@@ -214,6 +371,83 @@ h3 {
     flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 5px;
+}
+
+
+#game2 #start-screen {
+    text-align: center;
+    background-color: #ecf0f1;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+#game2 .language-btn {
+    margin: 10px;
+    padding: 15px 30px;
+    font-size: 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#game2 .language-btn:hover {
+    background-color: #2980b9;
+}
+
+#game2 #game-container {
+    width: 400px;
+    height: 600px;
+    border: 5px solid #3498db;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    background-color: #ecf0f1;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    display: none;
+}
+
+#game2 .letter {
+    position: absolute;
+    font-size: 40px;
+    left: 0;
+    top: 0;
+    transition: transform 0.1s ease;
+    cursor: pointer;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+#game2 .letter:hover {
+    transform: scale(1.2);
+}
+
+#game2 .hit-effect {
+    animation: hit-animation 0.3s ease;
+}
+
+#game2 #game-over {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    z-index: 10;
+}
+
+@keyframes hit-animation {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.7; }
+    100% { transform: scale(0); opacity: 0; }
 }
 
 label {
@@ -231,46 +465,45 @@ input[type="number"] {
     text-align: center;
 }
 
-button {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
 
 
 
-button#clearText {
-    background-color: #dc3545;
-    color: #fff;
-}
-
-button#clearText:hover {
-    background-color: #c82333;
-}
-
-/* textarea */
 textarea {
     width: 100%;
-    max-width: 770px;
-    height: 150px;
-    padding: 5px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
+    padding: 12px 16px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
     resize: none;
-    font-size: 1rem;
-    margin-bottom: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
+  }
+  
+  textarea:focus {
+    border-color: #5c9dff;
+    background-color: #e8f0fe;
+    outline: none;
+  }
+  
+  textarea::placeholder {
+    color: #888;
+    font-style: italic;
+  }
+  
+  textarea:hover {
+    border-color: #007bff;
+    background-color: #f1f9ff;
+  }
+  
 
 /* ผลลัพธ์ */
 .results {
     font-size: 1rem;
     padding: 5px;
     width: 100%;
-    max-width: 770px;
+    max-width: 870px;
     text-align: center;
 
 }
@@ -294,12 +527,54 @@ button {
     display: inline-block; /* ให้ปุ่มเป็นบล็อกในแถวเดียวกัน */
     font-size: 16px; /* ขนาดตัวอักษร */
     cursor: pointer; /* แสดงเคอร์เซอร์เป็นมือชี้เมื่อชี้ไปที่ปุ่ม */
-    border-radius: 4px; /* มุมโค้งมนของปุ่ม */
+    border-radius: 5px; /* มุมโค้งมนของปุ่ม */
     transition: background-color 0.3s; /* การเปลี่ยนแปลงสีพื้นหลังแบบค่อยเป็นค่อยไป */
+    
 }
 
 button:hover {
     background-color: #0b4409; /* สีพื้นหลังเมื่อชี้เมาส์ไปที่ปุ่ม */
+}
+
+button#clearText {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+button#clearText:hover {
+    background-color: #c82333;
+}
+
+#generateAllBtn {
+    background-color: var(--black-color); /* สีพื้นหลังของปุ่ม */
+    border: none; /* ไม่มีขอบ */
+    color: #67fe43f5; /* สีของตัวอักษร */
+    text-align: center;
+    display: inline-block;
+    padding: 42px 75px;
+    font-size: 16px;
+    font-weight: 600;
+    /* ความโค้งมนที่เยอะขึ้นเล็กน้อยเพื่อความนุ่มนวล */
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    /* เงาหลัก: เงาเข้มด้านล่างขวาและเงาสว่างด้านบนซ้าย */
+    box-shadow: 6px 6px 12px #b8bece, /* เงาเข้ม */
+                -6px -6px 12px #ffffff; /* เงาสว่าง */
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+#generateAllBtn:hover {
+    background-color: #0b4409; /* สีพื้นหลังเมื่อชี้เมาส์ไปที่ปุ่ม */
+}
+
+.button-generateAllBtn {
+    display: flex; /* เปิดใช้งาน Flexbox */
+    justify-content: center; /* จัดกึ่งกลางแนวนอนของ items ภายใน container */
+    align-items: center; /* จัดกึ่งกลางแนวตั้งของ items ภายใน container (ถ้ามีพื้นที่เพียงพอ) */
+    /* ถ้าคุณต้องการให้ container นี้อยู่กลางหน้าจอด้วย */
+    /* min-height: 100vh; */ /* เพื่อให้มีพื้นที่สูงพอให้จัดกึ่งกลางแนวตั้งได้ */
 }
 
 .controlscheckbox {
@@ -310,6 +585,30 @@ button:hover {
 
 }
 
+.calculator-section {
+    background: linear-gradient(135deg,rgb(224, 220, 241), rgb(210, 200, 243));
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    /* เปลี่ยนมาใช้ box-shadow สร้าง "ขอบ" แทน border */
+    box-shadow:
+        /* เงาชั้นใน (inner shadow) สร้างเอฟเฟกต์เหมือนแสงสะท้อนจากขอบด้านใน */
+        inset 0 0 0 1px rgba(255, 255, 255, 0.7), /* แสงสว่างด้านใน */
+        inset 0 0 0 2px rgba(0, 0, 0, 0.05),   /* เงาอ่อนๆ ด้านใน */
+        /* เงาหลักที่ยกองค์ประกอบขึ้นมา */
+        0 8px 20px rgba(0, 0, 0, 0.1),
+        0 3px 6px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
+}
+
+.calculator-section:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.9), /* แสงสว่างด้านในชัดขึ้น */
+        inset 0 0 0 2px rgba(0, 0, 0, 0.08),   /* เงาอ่อนๆ ด้านในชัดขึ้น */
+        0 12px 25px rgba(0, 0, 0, 0.15),
+        0 5px 10px rgba(0, 0, 0, 0.1);
+}
 .controlscheckbox label {
     display: flex;
     align-items: center;
@@ -321,6 +620,8 @@ button:hover {
     cursor: pointer;
     margin-bottom: 5px;
 }
+
+
 
 .controlscheckbox label:hover {
     background-color: #e7cdf1; /* สีเปลี่ยนเมื่อ hover */
@@ -378,13 +679,13 @@ button:hover {
 }
 
 
-#resultcard, #resultname, #resultphone,#resultconvertdate,#resultcookie,#resultyear,#resultbmi {
+#resultconvertdate,#resultcookie,#resultyear,#resultbmi {
     margin-top: 5px;
     font-size: 1.2em;
     color: #650194;
 }
 
-#copyMessage, #copyMessagename, #copyMessagephone {
+#copyMessage, #copyMessagename, #copyMessagephone, #copyMessageEmail {
     margin-top: 5px;
     color: green;
     font-size: 0.7em;
@@ -450,6 +751,7 @@ button:hover {
     width: 350px;
     height: 36px;
     padding: 10px;
+    margin-top: 15px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -461,6 +763,79 @@ button:hover {
     border-color: #007bff;
     background-color: #fff;
     outline: none;
+}
+
+#containerradiocard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 1000px;
+    /* padding: 30px; */
+    border-radius: 15px;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    width: 168px;
+    height: 35px; /* ปรับความสูงไม่เกิน 50px */
+    padding: 10px 15px;
+    border: 2px solid #e0e0e0; /* ขอบเริ่มต้น */
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #fff;
+    justify-content: center;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: #5d0da3; /* เปลี่ยนสีขอบเมื่อ hover */
+}
+
+.card input[type="radio"] {
+    display: none;
+}
+
+.radio-checkmark {
+    font-size: 20px;
+    color: #e0e0e0;
+    transition: all 0.3s ease;
+    margin-right: 20px; /* เพิ่มระยะห่างระหว่างไอคอนและข้อความ */
+}
+
+.card input[type="radio"]:checked + .radio-checkmark {
+    color: #5d0da3;
+}
+
+.card input[type="radio"]:checked ~ .card-title {
+    color: #5d0da3;
+}
+
+.card:has(input[type="radio"]:checked) {
+    border-color: #5d0da3; /* เปลี่ยนสีขอบเมื่อเลือก */
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+/* Animation for selected card */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.card input[type="radio"]:checked + .radio-checkmark {
+    animation: bounce 0.5s ease;
 }
 
 
@@ -813,6 +1188,22 @@ textarea, #jwtInput {
 
 }
 
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 2s infinite ease-in-out;
+}
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
 
 
 .spinner {
