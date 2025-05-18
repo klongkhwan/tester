@@ -33,6 +33,14 @@ function updatePlaceholders() {
     }
 }
 
+document.querySelectorAll(".card").forEach(card => {
+    card.addEventListener("click", function () {
+        document.querySelectorAll(".card").forEach(c => c.classList.remove("selected"));
+        this.classList.add("selected");
+        this.querySelector(".radio-input").checked = true;
+    });
+});
+
 
 function convert() {
     const conversionType = document.querySelector('input[name="conversionType"]:checked').value;
@@ -158,45 +166,29 @@ function convertToFile(type) {
         return;
     }
 
-    if (type === "binary") {
-        // แปลง Hex → Binary
-        const bytes = [];
-        for (let i = 0; i < hex.length; i += 2) {
-            bytes.push(parseInt(hex.substr(i, 2), 16));
-        }
-        const binaryData = new Uint8Array(bytes);
-        const blob = new Blob([binaryData], { type: "application/octet-stream" });
-        downloadFile(blob, "output.bin");
-    } 
-    if (type === "pdf") {
-        // แปลง Hex → Binary
-        const bytes = [];
-        for (let i = 0; i < hex.length; i += 2) {
-            bytes.push(parseInt(hex.substr(i, 2), 16));
-        }
-        const binaryData = new Uint8Array(bytes);
-        const blob = new Blob([binaryData], { type: "application/octet-stream" });
-        downloadFile(blob, "output.pdf");
-    } 
-    if (type === "excel") {
-        // แปลง Hex → Binary
-        const bytes = [];
-        for (let i = 0; i < hex.length; i += 2) {
-            bytes.push(parseInt(hex.substr(i, 2), 16));
-        }
-        const binaryData = new Uint8Array(bytes);
-        const blob = new Blob([binaryData], { type: "application/octet-stream" });
-        downloadFile(blob, "output.xlsx");
-    } 
-}
+    // แปลง Hex เป็น Binary
+    const bytes = [];
+    for (let i = 0; i < hex.length; i += 2) {
+        bytes.push(parseInt(hex.substr(i, 2), 16));
+    }
+    const binaryData = new Uint8Array(bytes);
 
-function downloadFile(blob, filename) {
+    // กำหนดชื่อไฟล์
+    let filename = "output.bin";
+    if (type === "pdf") {
+        filename = "output.pdf";
+    } else if (type === "excel") {
+        filename = "output.xlsx";
+    }
+
+    const blob = new Blob([binaryData], { type: "application/octet-stream" });
+    const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
+    link.href = url;
     link.download = filename;
     link.click();
+    URL.revokeObjectURL(url);
 }
-
 
 document.querySelectorAll('input[name="conversionType"]').forEach(radio => {
     radio.addEventListener('change', () => {

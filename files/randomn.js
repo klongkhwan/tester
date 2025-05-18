@@ -1,62 +1,125 @@
-function generateRandomID() {
-    let id = '';
-    let sum = 0;
-    let weights = [13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
+// randomn.js - ไฟล์สำหรับการจัดการฟังก์ชันสุ่มข้อมูลต่างๆ
 
-    // สุ่มเลข 12 หลักแรก
-    for (let i = 0; i < 12; i++) {
-        let digit = Math.floor(Math.random() * 10);
-        id += digit;
-        sum += digit * weights[i];
-    }
-
-    // คำนวณหลักตรวจสอบ
-    let checkDigit = (11 - (sum % 11)) % 10;
-    id += checkDigit;
-
-    return id;
-}
-
-function copyToClipboard(text) {
-    const tempInput = document.createElement('input');
-    tempInput.value = text;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand('copy');
-    document.body.removeChild(tempInput);
-}
-
-document.getElementById('generateBtn').addEventListener('click', function() {
-    let randomID = generateRandomID();
-    document.getElementById('resultcard').innerText = randomID;
-    copyToClipboard(randomID);
-
-    // ซ่อนข้อความคัดลอกของชื่อและแสดงข้อความคัดลอกของเลขบัตร
-    document.getElementById('copyMessagename').style.display = 'none';
-    document.getElementById('copyMessagephone').style.display = 'none';
-    document.getElementById('copyMessage').innerText = 'คัดลอกแล้ว!';
-    document.getElementById('copyMessage').style.display = 'block';
-});
-
+// ตัวแปรสำหรับการสุ่มชื่อ
 let firstnames = [];
 let lastnames = [];
 let generatedName = ''; // เพื่อเก็บชื่อที่สุ่มได้
 
-// โหลดข้อมูลจากไฟล์ JSON
-fetch('files/names.json')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(json => {
-        firstnames = json.firstname;
-        lastnames = json.lastname;
-    })
-    .catch(error => console.error('Error loading JSON:', error));
+// โหลดข้อมูลจากไฟล์ JSON สำหรับชื่อ
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('files/names.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(json => {
+            firstnames = json.firstname;
+            lastnames = json.lastname;
+        })
+        .catch(error => console.error('Error loading JSON:', error));
+        
+    // ตั้งค่าให้ radio button ภาษาไทยถูกเลือกโดยค่าเริ่มต้น
+    document.querySelector('input[name="language"][value="thai"]').checked = true;
+    
+    // ตั้งค่าฟังก์ชันคัดลอกสำหรับทุกหมวด
+    setupCopyFunctionality('resultcard', 'copyMessageidcard');
+    setupCopyFunctionality('resultphone', 'copyMessagephone');
+    setupCopyFunctionality('emailResult', 'copyMessageEmail');
+    setupCopyFunctionality('dateResult', 'copyMessageDate');
+    setupCopyFunctionality('resultname', 'copyMessagename');
+});
 
-function generateName() {
+// ฟังก์ชันสำหรับสุ่มเลขบัตรประชาชน
+document.getElementById('generateCardBtn').addEventListener('click', function() {
+    // สร้างเลขบัตร 13 หลัก
+    let idCard = "";
+    for (let i = 0; i < 13; i++) {
+        idCard += Math.floor(Math.random() * 10);
+    }
+    
+    // แสดงผล
+    document.getElementById('resultcard').textContent = idCard;
+    copyToClipboard(idCard, 'copyMessageidcard');
+});
+
+// ฟังก์ชันสำหรับสุ่มเบอร์โทรศัพท์
+document.getElementById('generatePhoneBtn').addEventListener('click', function() {
+    // เริ่มต้นด้วย 08, 09, 06
+    const prefixes = ['08', '09', '06'];
+    const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+    
+    // สร้างเบอร์โทรศัพท์ที่เหลือ
+    let phoneNumber = prefix;
+    for (let i = 0; i < 8; i++) {
+        phoneNumber += Math.floor(Math.random() * 10);
+    }
+    
+    // แสดงผลในรูปแบบ 0xx-xxx-xxxx
+    const formattedPhone = phoneNumber.substring(0, 3) + '-' + 
+                          phoneNumber.substring(3, 6) + '-' + 
+                          phoneNumber.substring(6);
+    
+    document.getElementById('resultphone').textContent = formattedPhone;
+    copyToClipboard(formattedPhone, 'copyMessagephone');
+});
+
+// ฟังก์ชันสำหรับสุ่มอีเมล
+document.getElementById('generateEmailBtn').addEventListener('click', function() {
+    const domains = ['gmail.com', 'hotmail.com', 'yahoo.com', 'outlook.com'];
+    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    
+    // สร้างชื่อผู้ใช้
+    let username = '';
+    const usernameLength = Math.floor(Math.random() * 8) + 5; // ความยาว 5-12 ตัวอักษร
+    
+    for (let i = 0; i < usernameLength; i++) {
+        username += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    
+    // สุ่มโดเมน
+    const domain = domains[Math.floor(Math.random() * domains.length)];
+    
+    // สร้างอีเมล
+    const email = username + '@' + domain;
+    
+    document.getElementById('emailResult').textContent = email;
+    copyToClipboard(email, 'copyMessageEmail');
+});
+
+// ฟังก์ชันสำหรับสุ่มวันที่
+document.getElementById('generateDateBtn').addEventListener('click', function() {
+    // สุ่มปีระหว่าง 1970-2025
+    const year = Math.floor(Math.random() * (2025 - 1970 + 1)) + 1970;
+    
+    // สุ่มเดือน 1-12
+    const month = Math.floor(Math.random() * 12) + 1;
+    
+    // กำหนดจำนวนวันในแต่ละเดือน
+    let maxDay;
+    if (month === 2) {
+        // เดือนกุมภาพันธ์ ตรวจสอบปีอธิกสุรทิน
+        maxDay = (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) ? 29 : 28;
+    } else if ([4, 6, 9, 11].includes(month)) {
+        maxDay = 30;
+    } else {
+        maxDay = 31;
+    }
+    
+    // สุ่มวัน
+    const day = Math.floor(Math.random() * maxDay) + 1;
+    
+    // จัดรูปแบบวันที่ DD/MM/YYYY
+    const formattedDate = `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
+    
+    document.getElementById('dateResult').textContent = formattedDate;
+    copyToClipboard(formattedDate, 'copyMessageDate');
+    
+});
+
+// ฟังก์ชันสำหรับสุ่มชื่อ
+document.getElementById('generateNameBtn').addEventListener('click', function() {
     if (firstnames.length === 0 || lastnames.length === 0) {
         document.getElementById("resultname").innerText = "ข้อมูลยังไม่โหลด";
         return;
@@ -87,63 +150,147 @@ function generateName() {
 
     generatedName = `${firstname} ${lastname}`;
     document.getElementById("resultname").innerText = generatedName;
+    copyToClipboard(generatedName, 'copyMessagename');
+});
 
-    // คัดลอกชื่อที่สุ่มได้ไปยังคลิปบอร์ด
-    copyNameToClipboard();
+// ฟังก์ชันสำหรับคัดลอกข้อความ
+function setupCopyFunctionality(resultId, copyMessageId) {
+    document.getElementById(resultId).addEventListener('click', function() {
+        const text = this.textContent;
+        if (text && !text.includes('คลิกปุ่ม Random')) {
+            navigator.clipboard.writeText(text).then(() => {
+                // ซ่อนข้อความคัดลอกทั้งหมดก่อน
+                hideAllCopyMessages();
+                
+                // แสดงข้อความคัดลอกของหมวดนี้
+                const copyMessage = document.getElementById(copyMessageId);
+                copyMessage.style.display = 'block';
+                setTimeout(() => {
+                    copyMessage.style.display = 'none';
+                }, 2000);
+            });
+        }
+    });
 }
 
-function copyNameToClipboard() {
-    if (!generatedName) {
-        document.getElementById("resultname").innerText = "กรุณาสุ่มชื่อก่อน";
+// ฟังก์ชันสำหรับซ่อนข้อความคัดลอกทั้งหมด
+function hideAllCopyMessages() {
+    document.getElementById('copyMessageidcard').style.display = 'none';
+    document.getElementById('copyMessagephone').style.display = 'none';
+    document.getElementById('copyMessageEmail').style.display = 'none';
+    document.getElementById('copyMessageDate').style.display = 'none';
+    document.getElementById('copyMessagename').style.display = 'none';
+}
+
+function generateCardOnly() {
+    let idCard = "";
+    for (let i = 0; i < 13; i++) {
+        idCard += Math.floor(Math.random() * 10);
+    }
+    document.getElementById('resultcard').textContent = idCard;
+}
+
+function generatePhoneOnly() {
+    const prefixes = ['08', '09', '06'];
+    const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+
+    let phoneNumber = prefix;
+    for (let i = 0; i < 8; i++) {
+        phoneNumber += Math.floor(Math.random() * 10);
+    }
+
+    const formattedPhone = phoneNumber.substring(0, 3) + '-' + 
+                          phoneNumber.substring(3, 6) + '-' + 
+                          phoneNumber.substring(6);
+    
+    document.getElementById('resultphone').textContent = formattedPhone;
+}
+
+function generateEmailOnly() {
+    const domains = ['gmail.com', 'hotmail.com', 'yahoo.com', 'outlook.com'];
+    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+
+    let username = '';
+    const usernameLength = Math.floor(Math.random() * 8) + 5;
+    for (let i = 0; i < usernameLength; i++) {
+        username += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+
+    const domain = domains[Math.floor(Math.random() * domains.length)];
+    const email = username + '@' + domain;
+
+    document.getElementById('emailResult').textContent = email;
+}
+
+function generateDateOnly() {
+    const year = Math.floor(Math.random() * (2025 - 1970 + 1)) + 1970;
+    const month = Math.floor(Math.random() * 12) + 1;
+
+    let maxDay;
+    if (month === 2) {
+        maxDay = (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0)) ? 29 : 28;
+    } else if ([4, 6, 9, 11].includes(month)) {
+        maxDay = 30;
+    } else {
+        maxDay = 31;
+    }
+
+    const day = Math.floor(Math.random() * maxDay) + 1;
+    const formattedDate = `${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}`;
+
+    document.getElementById('dateResult').textContent = formattedDate;
+}
+
+function generateNameOnly() {
+    if (firstnames.length === 0 || lastnames.length === 0) {
+        document.getElementById("resultname").innerText = "ข้อมูลยังไม่โหลด";
         return;
     }
-    
-    // สร้าง element ชั่วคราวเพื่อคัดลอกข้อความ
-    const tempInput = document.createElement("input");
-    tempInput.value = generatedName;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand("copy");
-    document.body.removeChild(tempInput);
-    
-    // ซ่อนข้อความคัดลอกของเลขบัตรและแสดงข้อความคัดลอกของชื่อ
-    document.getElementById('copyMessage').style.display = 'none';
-    document.getElementById('copyMessagephone').style.display = 'none';
-    document.getElementById('copyMessagename').innerText = 'คัดลอกแล้ว!';
-    document.getElementById('copyMessagename').style.display = 'block';
+
+    const selectedLanguage = document.querySelector('input[name="language"]:checked').value;
+
+    let firstname = '';
+    let lastname = '';
+
+    if (selectedLanguage === 'thai') {
+        const randomFirstName = firstnames[Math.floor(Math.random() * firstnames.length)];
+        const randomLastName = lastnames[Math.floor(Math.random() * lastnames.length)];
+        firstname = randomFirstName.th;
+        lastname = randomLastName.th;
+    } else if (selectedLanguage === 'english') {
+        const randomFirstName = firstnames[Math.floor(Math.random() * firstnames.length)];
+        const randomLastName = lastnames[Math.floor(Math.random() * lastnames.length)];
+        firstname = randomFirstName.en;
+        lastname = randomLastName.en;
+    } else {
+        firstname = "กรุณาเลือกภาษาของชื่อ";
+        lastname = "";
+    }
+
+    generatedName = `${firstname} ${lastname}`;
+    document.getElementById("resultname").innerText = generatedName;
 }
 
-// ตั้งค่าให้ radio button ภาษาไทยถูกเลือกโดยค่าเริ่มต้น
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.querySelector('input[name="language"][value="thai"]').checked = true;
+
+document.getElementById('generateAllBtn').addEventListener('click', function() {
+    generateCardOnly();
+    generatePhoneOnly();
+    generateEmailOnly();
+    generateDateOnly();
+    generateNameOnly();
 });
 
 
 
-function generatePhoneNumber() {
-    // กำหนดหลักที่สองให้สุ่มจาก 8 ถึง 9
-    const secondDigit = Math.floor(Math.random() * 2) + 8;
-
-    // สุ่มหลักที่เหลือเป็น 0 ถึง 9 จำนวน 8 หลัก
-    const remainingDigits = Math.floor(Math.random() * 100000000).toString().padStart(8, '0');
-
-    // รวมหมายเลขโทรศัพท์ให้มีทั้งหมด 10 หลัก
-    const phoneNumber = '0' + secondDigit + remainingDigits;
-
-    // แสดงหมายเลขโทรศัพท์ในหน้าเว็บ
-    document.getElementById('resultphone').textContent = phoneNumber;
-
-    // คัดลอกหมายเลขโทรศัพท์ไปยังคลิปบอร์ด
-    const tempInput = document.createElement('input');
-    tempInput.value = phoneNumber;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand('copy');
-    document.body.removeChild(tempInput);
-
-    // แสดงข้อความคัดลอก
-    document.getElementById('copyMessage').style.display = 'none';
-    document.getElementById('copyMessagename').style.display = 'none';
-    document.getElementById('copyMessagephone').innerText = 'คัดลอกแล้ว!';
-    document.getElementById('copyMessagephone').style.display = 'block';
+function copyToClipboard(text, messageId) {
+    navigator.clipboard.writeText(text).then(() => {
+        hideAllCopyMessages();
+        const message = document.getElementById(messageId);
+        if (message) {
+            message.style.display = 'block';
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 2000);
+        }
+    });
 }

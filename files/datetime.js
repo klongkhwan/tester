@@ -200,6 +200,11 @@ function validateInputbmi(input) {
     }
 }
 
+document.getElementById("clearvalue").addEventListener("click", function () {
+    document.getElementById("timeInput").value = "";
+});
+
+
 function calculateBMI() {
     let weight = parseFloat(document.getElementById("inputweight").value);
     let height = parseFloat(document.getElementById("inputheight").value) / 100; // แปลงเป็นเมตร
