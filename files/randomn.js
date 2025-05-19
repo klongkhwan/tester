@@ -31,18 +31,27 @@ document.addEventListener('DOMContentLoaded', function() {
     setupCopyFunctionality('resultname', 'copyMessagename');
 });
 
-// ฟังก์ชันสำหรับสุ่มเลขบัตรประชาชน
 document.getElementById('generateCardBtn').addEventListener('click', function() {
-    // สร้างเลขบัตร 13 หลัก
+    // สุ่มเลข 12 หลักแรก
     let idCard = "";
-    for (let i = 0; i < 13; i++) {
+    for (let i = 0; i < 12; i++) {
         idCard += Math.floor(Math.random() * 10);
     }
-    
+
+    // คำนวณ Check Digit (หลักที่ 13)
+    let sum = 0;
+    for (let i = 0; i < 12; i++) {
+        sum += parseInt(idCard[i]) * (13 - i);
+    }
+
+    let checkDigit = (11 - (sum % 11)) % 10;
+    idCard += checkDigit;
+
     // แสดงผล
     document.getElementById('resultcard').textContent = idCard;
     copyToClipboard(idCard, 'copyMessageidcard');
 });
+
 
 // ฟังก์ชันสำหรับสุ่มเบอร์โทรศัพท์
 document.getElementById('generatePhoneBtn').addEventListener('click', function() {
@@ -167,7 +176,7 @@ function setupCopyFunctionality(resultId, copyMessageId) {
                 copyMessage.style.display = 'block';
                 setTimeout(() => {
                     copyMessage.style.display = 'none';
-                }, 2000);
+                }, 3000);
             });
         }
     });
