@@ -36,10 +36,30 @@
     </video>
     </div>
 
-    <section id="home">
-        <h1>Home</h1>
-        <p>This is the about page content.</p>
+    <<section id="home" class="home-section">
+        <div class="home-content">
+            <h1>ยินดีต้อนรับสู่ 3CAT</h1>
+            <p>ระบบเรียนรู้และเครื่องมือ</p>
+            <div class="home-cards">
+                <div class="home-card" onclick="showSection('menu1')">
+                    <i class="fas fa-book"></i>
+                    <h3>Knowledge</h3>
+                    <p>รวมความรู้สำหรับ Tester</p>
+                </div>
+                <div class="home-card" onclick="showSection('menu2')">
+                    <i class="fas fa-tools"></i>
+                    <h3>Tools</h3>
+                    <p>เครื่องมือช่วยในงานเทส</p>
+                </div>
+                <div class="home-card" onclick="showSection('practice')">
+                    <i class="fas fa-keyboard"></i>
+                    <h3>Practice</h3>
+                    <p>ฝึกสกิลหน่อย</p>
+                </div>
+            </div>
+        </div>
     </section>
+
 
 
 
@@ -234,7 +254,7 @@
                 <!-- คอลัมน์ขวา -->
                 <div class="column">
                     <div class="section">
-                        <h1>สุ่มทั้งหมด</h1>
+                        <h1>สุ่มทั้งหมด</h1><br><br>
                         <div class="button-generateAllBtn">
                         <button id="generateAllBtn">Random</button>
                         </div>
