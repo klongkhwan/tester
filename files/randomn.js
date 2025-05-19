@@ -100,7 +100,7 @@ document.getElementById('generateEmailBtn').addEventListener('click', function()
 // ฟังก์ชันสำหรับสุ่มวันที่
 document.getElementById('generateDateBtn').addEventListener('click', function() {
     // สุ่มปีระหว่าง 1970-2025
-    const year = Math.floor(Math.random() * (2025 - 1970 + 1)) + 1970;
+    const year = Math.floor(Math.random() * (2015 - 1990 + 1)) + 1970;
     
     // สุ่มเดือน 1-12
     const month = Math.floor(Math.random() * 12) + 1;
