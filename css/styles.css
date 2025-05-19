@@ -118,6 +118,11 @@ ul li ul li a:hover {
             
 }
 
+.button-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
         
 .result-box {
@@ -125,7 +130,7 @@ ul li ul li a:hover {
             padding: 5px;
             border: 1px solid #ddd;
             border-radius: 4px;
-            background-color: white;
+            background-color: linear-gradient(135deg,rgb(224, 220, 241), rgb(210, 200, 243));
             min-height: 10px;
             cursor: pointer;
 }
