@@ -124,6 +124,59 @@ ul li ul li a:hover {
     gap: 10px;
 }
 
+.home-section {
+    padding: 60px 20px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+}
+
+.home-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.home-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.home-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 20px;
+    width: 200px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.home-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.home-card i {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.home-card h3 {
+    margin: 10px 0 5px;
+    font-size: 20px;
+}
+
+.home-card p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
         
 .result-box {
             margin-top: 10px;
@@ -556,7 +609,7 @@ button#clearText:hover {
     color: #67fe43f5; /* สีของตัวอักษร */
     text-align: center;
     display: inline-block;
-    padding: 42px 75px;
+    padding: 32px 55px;
     font-size: 16px;
     font-weight: 600;
     /* ความโค้งมนที่เยอะขึ้นเล็กน้อยเพื่อความนุ่มนวล */
