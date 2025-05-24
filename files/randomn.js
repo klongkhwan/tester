@@ -31,26 +31,38 @@ document.addEventListener('DOMContentLoaded', function() {
     setupCopyFunctionality('resultname', 'copyMessagename');
 });
 
-document.getElementById('generateCardBtn').addEventListener('click', function() {
-    // สุ่มเลข 12 หลักแรก
-    let idCard = "";
+document.getElementById('generateCardBtn').addEventListener('click', function () {
+    let idCard = '';
+
+    // สุ่มเลข 12 หลักแรก (หลักที่ 1-12)
     for (let i = 0; i < 12; i++) {
         idCard += Math.floor(Math.random() * 10);
     }
 
-    // คำนวณ Check Digit (หลักที่ 13)
+    // คำนวณหลักที่ 13 (Check Digit) ตามสูตรของบัตรประชาชนไทย
     let sum = 0;
     for (let i = 0; i < 12; i++) {
         sum += parseInt(idCard[i]) * (13 - i);
     }
 
-    let checkDigit = (11 - (sum % 11)) % 10;
+    let remainder = sum % 11;
+    let checkDigit;
+    
+    if (remainder < 2) {
+        checkDigit = 1 - remainder;
+    } else {
+        checkDigit = 11 - remainder;
+    }
+
     idCard += checkDigit;
 
-    // แสดงผล
+    // แสดงผลลัพธ์
     document.getElementById('resultcard').textContent = idCard;
+
+    // คัดลอกไปยังคลิปบอร์ด
     copyToClipboard(idCard, 'copyMessageidcard');
 });
+
 
 
 // ฟังก์ชันสำหรับสุ่มเบอร์โทรศัพท์
