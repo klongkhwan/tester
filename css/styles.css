@@ -609,7 +609,7 @@ button#clearText:hover {
     color: #67fe43f5; /* สีของตัวอักษร */
     text-align: center;
     display: inline-block;
-    padding: 32px 55px;
+    padding: 22px 55px;
     font-size: 16px;
     font-weight: 600;
     /* ความโค้งมนที่เยอะขึ้นเล็กน้อยเพื่อความนุ่มนวล */
@@ -628,12 +628,50 @@ button#clearText:hover {
 }
 
 .button-generateAllBtn {
-    display: flex; /* เปิดใช้งาน Flexbox */
+    display: flex; 
     justify-content: center; /* จัดกึ่งกลางแนวนอนของ items ภายใน container */
     align-items: center; /* จัดกึ่งกลางแนวตั้งของ items ภายใน container (ถ้ามีพื้นที่เพียงพอ) */
     /* ถ้าคุณต้องการให้ container นี้อยู่กลางหน้าจอด้วย */
     /* min-height: 100vh; */ /* เพื่อให้มีพื้นที่สูงพอให้จัดกึ่งกลางแนวตั้งได้ */
 }
+
+.env-links {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.env-links h2 {
+    margin-bottom: 16px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.env-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.env-link {
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.env-link.dev { background-color: #007bff; }
+.env-link.sit { background-color: #28a745; }
+.env-link.uat { background-color: #ffc107; color: black; }
+.env-link.prod { background-color: #dc3545; }
+.env-link.F43 { background-color:rgb(90, 55, 218); }
+
+.env-link:hover {
+    opacity: 0.85;
+}
+
 
 .controlscheckbox {
     display: flex;
