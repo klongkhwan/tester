@@ -34,25 +34,22 @@ document.addEventListener('DOMContentLoaded', function() {
 document.getElementById('generateCardBtn').addEventListener('click', function () {
     let idCard = '';
 
-    // สุ่มเลข 12 หลักแรก (หลักที่ 1-12)
-    for (let i = 0; i < 12; i++) {
+    // สุ่มหลักแรก (ประเภทบุคคล 1-8)
+    idCard += Math.floor(Math.random() * 8) + 1;
+
+    // สุ่มหลักที่ 2-12
+    for (let i = 1; i < 12; i++) {
         idCard += Math.floor(Math.random() * 10);
     }
 
-    // คำนวณหลักที่ 13 (Check Digit) ตามสูตรของบัตรประชาชนไทย
+    // คำนวณเลขหลักที่ 13 (Check Digit)
     let sum = 0;
     for (let i = 0; i < 12; i++) {
         sum += parseInt(idCard[i]) * (13 - i);
     }
 
     let remainder = sum % 11;
-    let checkDigit;
-    
-    if (remainder < 2) {
-        checkDigit = 1 - remainder;
-    } else {
-        checkDigit = 11 - remainder;
-    }
+    let checkDigit = (11 - remainder) % 10;
 
     idCard += checkDigit;
 
