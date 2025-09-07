@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="icon" href="css/favicon-16x16.png" type="image/png">
+    <script src="files/scripts.js"></script>  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+    <title>3CAT</title>
+    <link rel="stylesheet" href="css/styles.css">
+    
+  
+</head>
+<body>
+    
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('home')">Home</a></li>
+            <li><a href="#" onclick="showSection('menu1')">Knowledge</a></li>
+            <li><a href="#" onclick="showSection('menu2')">Tools</a></li>
+            <li><a href="#" onclick="showSection('practice')">Practice</a></li>            
+            <li><a href="#" onclick="showSection('about')">About</a></li>
+        </ul>
+    </nav>
+    <div class="spinner" id="spinner"></div>
+   
+
+    <div id="home-container" class="video-container">
+    <video autoplay loop muted class="background-video">
+        <source src="css/home2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    </div>
+
+    <<section id="home" class="home-section">
+        <div class="home-content">
+            <h1>ยินดีต้อนรับสู่ 3CAT</h1>
+            <p>ระบบเรียนรู้และเครื่องมือ</p>
+            <div class="home-cards">
+                <div class="home-card" onclick="showSection('menu1')">
+                    <i class="fas fa-book"></i>
+                    <h3>Knowledge</h3>
+                    <p>รวมความรู้สำหรับ Tester</p>
+                </div>
+                <div class="home-card" onclick="showSection('menu2')">
+                    <i class="fas fa-tools"></i>
+                    <h3>Tools</h3>
+                    <p>เครื่องมือช่วยในงานเทส</p>
+                </div>
+                <div class="home-card" onclick="showSection('practice')">
+                    <i class="fas fa-keyboard"></i>
+                    <h3>Practice</h3>
+                    <p>ฝึกสกิลหน่อย</p>
+                </div>
+                <div class="env-links">
+                    <hr class="env-divider">
+                    <h2>Links</h2>
+                    <div class="env-buttons">
+                        <a href="https://health-dev.local-gov.dev" target="_blank" class="env-link dev">DEV</a>
+                        <a href="https://health-sit.local-gov.dev/" target="_blank" class="env-link sit">SIT</a>
+                        <a href="https://health-uat.local-gov.dev/" target="_blank" class="env-link uat">UAT</a>
+                        <a href="https://health.localgov.ai" target="_blank" class="env-link prod">PROD</a>
+                        <a href="https://hdata.moph.go.th/site/?page_id=84" target="_blank" class="env-link F43">43 แฟ้ม</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+    
+    
+    <section id="practice">
+        <h1>Practice</h1>
+        <div class="card-container">
+            <div class="cardgame" id="card1" onclick="showGame('game1', this)">Game 1</div>
+            <!-- <div class="cardgame" id="card2" onclick="showGame('game2', this)">Game 2</div>
+            <div class="cardgame" id="card3" onclick="showGame('game3', this)">Game 3</div>
+            <div class="cardgame" id="card4" onclick="showGame('game4', this)">Game 4</div> -->
+          </div>
+          
+          <div id="game1" class="game" style="display: none;" style="text-align: center;">
+            <label style="text-align: center;" for="language-select">Choose Language : </label>
+            <select id="language-select">
+                <option value="thai">ไทย</option>
+                <option value="english">English</option>
+            </select>
+            <button id="startgame" onclick="startGame()">Start</button>
+            
+            
+            <div id="game-container" style="display:none;"><div id="result" style="display:none; "></div></div>
+            <input type="text" id="input-box" placeholder="Type here..." disabled 
+           style="display: block; text-align: center;  margin-left: auto; margin-right: auto; width: 50%;">
+    
+            <div id="stats" style=" margin-top: 20px;">Time: <span id="time" >60</span>s <span id="speed" style="display:none;"></span><span id="accuracy" style="display:none;"></span></div>
+            <div id="resultgame" style="display:none; "></div>
+            <audio id="correct-sound" src="https://www.myinstants.com/media/sounds/correct.mp3"></audio>
+            <script src="files/game1.js"></script>
+        </div>
+            <div id="game2" class="game" style="display: none;">Game 2 Content
+            <div id="start-screen">
+                <h1>เลือกภาษา</h1>
+                <button class="language-btn" onclick="startGame2('english')">English (A-Z)</button>
+                <button class="language-btn" onclick="startGame2('thai')">ภาษาไทย (ก-ฮ)</button>
+                
+            </div>
+        
+            <div id="game-container">
+                <div id="score">คะแนน: 0</div>
+                <div id="game-over">
+                    <h2>จบเกม!</h2>
+                    <p id="final-score">คะแนน: 0</p>
+                    <button onclick="restartGame()">เล่นอีกครั้ง</button>
+                </div>
+            </div>
+            <script src="files/game2.js"></script>
+            </div>  
+          <div id="game3" class="game" style="display: none;">Game 3 Content</div>
+          <div id="game4" class="game" style="display: none;">Game 4 Content</div>
+          
+          <div id="selectedGameLabel" class="selected-game" style="display: none;">Select a game to start</div>
+          
+          <script>
+          function showGame(gameId, selectedCard) {
+            // ซ่อนเกมทั้งหมด
+            const games = document.querySelectorAll('.game');
+            games.forEach(game => game.style.display = 'none');
+            
+            // ซ่อนขอบของการ์ดทั้งหมด
+            const cards = document.querySelectorAll('.cardgame');
+            cards.forEach(card => card.classList.remove('selected'));
+            
+            // แสดงเกมที่เลือก
+            const selectedGame = document.getElementById(gameId);
+            const gameLabel = document.getElementById("selectedGameLabel");
+            
+            if (selectedGame) {
+              selectedGame.style.display = 'block';
+              
+            }
+            
+            // เพิ่มคลาสสำหรับการ์ดที่ถูกเลือก
+            selectedCard.classList.add('selected');
+          }
+          </script>
+             
+    </section>
+
+    <section id="menu1">                
+        <div class="tab-container">
+            <ul class="tabs">
+                <li class="tab-link active" data-tab="tester">Tester</li>
+                <li class="tab-link" data-tab="testcase">Test Case</li>
+                <li class="tab-link" data-tab="postman">Postman</li>
+                <li class="tab-link" data-tab="automate">Automate</li>
+                <li class="tab-link" data-tab="sql">SQL</li>
+                <li class="tab-link" data-tab="docker">Docker</li>
+            </ul>
+        
+            <div id="tester" class="tab-content active">
+                <h1>Tester</h1>               
+            </div>
+
+            <div id="testcase" class="tab-content active">
+                <h1>Test Case</h1>         
+                <div class="calculator-section">
+                    <h3>แบบฟอร์มช่วยสร้าง Test Case</h3>
+                     <label>แสดงตัวอย่าง
+                        <input type="checkbox" id="showExample" onchange="toggleExample()">
+                    </label><br>
+                    <label>1. ชื่อฟังก์ชันหรือระบบ </label>
+                    <input type="text" id="featureName" placeholder="เช่น จัดการตั้งค่าวันหยุด"><br>
+
+                    <label>2. Requirement หรือ User Story</label>
+                    <textarea id="requirement" placeholder="รายละเอียดการใช้งาน, Flow การทำงาน, จุดเชื่อมโยงกับระบบอื่น ฯลฯ"></textarea>
+                    
+                    <label>3. รายละเอียดหน้าจอ</label>
+                    <textarea id="userAction" placeholder="เช่น มีปุ่มบันทึก ช่องกรอก"></textarea>
+
+                    <label>4 ข้อจำกัดหรือเงื่อนไข</label>
+                    <textarea id="conditions" placeholder="เช่น หากไม่กรอกข้อมูลให้ครบถ้วน ระบบจะแจ้งเตือน..."></textarea>
+
+                    <label>5. Test Data</label>
+                    <textarea id="testData" placeholder="ข้อมูลทดสอบ เช่น วันปีใหม่ 1/1/2567 เป็นต้น"></textarea>
+
+                    <button onclick="generateResult()">แสดงผลลัพธ์</button><br>
+
+                    <textarea id="resultText" placeholder="ผลลัพธ์ที่ได้" readonly></textarea></textarea>
+
+                    <button onclick="copyResult()">คัดลอก</button>
+                    
+                </div>
+                <script src="files/testcase.js"></script>
+            </div>
+
+            <div id="postman" class="tab-content">
+                <h1>Postman</h1>
+            </div>
+           
+            <div id="sql" class="tab-content">
+                <h1>SQL</h1>
+                    <textarea id="textAreasql" placeholder="เลือกรูปแบบ..." oninput="toggleCopyButton()" disabled ></textarea>
+                    <h3>รูปแบบใช้งาน</h3>
+                    <div class="controls">
+                        <button id="buttoncopyfixtext"  class="copyButton" onclick="copyText('VisitInfo')">Visit Info</button>
+                        <button id="buttoncopyfixtext"  class="copyButton" onclick="copyText('join1')">1 join</button>
+                        <button id="buttoncopyfixtext"  class="copyButton" onclick="copyText('join2')">2 join</button>
+                        <button id="buttoncopyfixtext"  class="copyButton" onclick="copyText('schema2')">2 schema</button>
+                    </div>
+
+                    <script src="files/sql.js"></script>
+            </div>
+
+            <div id="automate" class="tab-content active">
+                <h1>Automate</h1>
+                
+            </div>
+
+            <div id="docker" class="tab-content active">
+                <h1>docker</h1>
+                
+            </div>
+        </div>
+        <script src="files/scripts.js"></script>
+        
+    </section>
+
+    <section id="menu2">
+        <div class="tab-container">
+            <ul class="tabs">
+                <li class="tab-link active" data-tab="random">สุ่มทุกอย่าง</li>
+                <li class="tab-link" data-tab="Count">นับตัวอักษร</li>
+                <li class="tab-link" data-tab="date">คำนวณ</li>
+                <li class="tab-link" data-tab="convert">แปลงค่า</li>
+            </ul>
+        
+            <div id="random" class="tab-content active">
+               
+            <div class="container">
+            
+        <!-- คอลัมน์ซ้าย -->
+                <div class="column">
+                    <div class="section">         
+                        <h1>สุ่มชื่อ</h1>
+                        <div class="language-selector">
+                            <label><input class="custom-radio" type="radio" name="language" value="thai" checked> ภาษาไทย</label>
+                            <label><input class="custom-radio" type="radio" name="language" value="english"> ภาษาอังกฤษ</label>
+                        </div>
+                        <div class="button-row">
+                            <button id="generateNameBtn">Random</button>
+                            <span id="copyMessagename" class="copy-message">คัดลอกเรียบร้อยแล้ว!</span>
+                        </div>
+                        <div id="resultname" class="result-box">คลิกปุ่ม Random เพื่อสุ่มชื่อ</div>
+                    </div> 
+                    
+                    
+                </div>
+                
+                <!-- คอลัมน์ขวา -->
+                <div class="column">
+                    <div class="section">
+                        <h1>สุ่มทั้งหมด</h1><br><br>
+                        <div class="button-generateAllBtn">
+                        <button id="generateAllBtn">Random</button>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>    
+
+                
+            <div class="container">
+            
+        <!-- คอลัมน์ซ้าย -->
+                <div class="column">
+                    <div class="section">
+                        <h1>สุ่มเลขบัตรประชาชน</h1>
+                        <div class="button-row">
+                            <button id="generateCardBtn">Random</button>
+                            <span id="copyMessageidcard" class="copy-message">คัดลอกเรียบร้อยแล้ว!</span>
+                        </div>
+                        <div id="resultcard" class="result-box">คลิกปุ่ม Random เพื่อสุ่มเลขบัตร</div>
+                    </div>
+                    
+                    <div class="section">
+                        <h1>สุ่มอีเมลล์</h1>
+                        <div class="button-row">
+                            <button id="generateEmailBtn">Random</button>
+                            <span id="copyMessageEmail" class="copy-message">คัดลอกเรียบร้อยแล้ว!</span>
+                        </div>
+                        <div id="emailResult" class="result-box">คลิกปุ่ม Random เพื่อสุ่มอีเมล</div>
+                    </div>
+                </div>
+                
+                <!-- คอลัมน์ขวา -->
+                <div class="column">
+                    <div class="section">
+                        <h1>สุ่มเบอร์โทรศัพท์</h1>
+                        <div class="button-row">
+                            <button id="generatePhoneBtn">Random</button>
+                            <span id="copyMessagephone" class="copy-message">คัดลอกเรียบร้อยแล้ว!</span>
+                        </div>
+                        <div id="resultphone" class="result-box">คลิกปุ่ม Random เพื่อสุ่มเบอร์โทร</div>
+                    </div>
+                    
+                    <div class="section">
+                        <h1>สุ่มวันที่</h1>
+                        <div class="button-row">
+                            <button id="generateDateBtn">Random</button>
+                            <span id="copyMessageDate" class="copy-message">คัดลอกเรียบร้อยแล้ว!</span>
+                        </div>
+                        <div id="dateResult" class="result-box">คลิกปุ่ม Random เพื่อสุ่มวันที่</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Load external JavaScript file -->
+            <script src="files/randomn.js"></script>
+
+               
+            </div>
+        
+            <div id="Count" class="tab-content">
+                <h1>นับตัวอักษร</h1>
+                <div class="calculator-section"> 
+                <div class="controlscheckbox">
+                    <label><input type="checkbox" id="th" checked> ไทย</label>
+                    <label><input type="checkbox" id="en"> อังกฤษ</label>
+                    <label><input type="checkbox" id="number"> ตัวเลข</label>
+                    <label><input type="checkbox" id="special"> ตัวอักษรพิเศษ</label>
+                    <label><input type="checkbox" id="space"> ช่องว่าง</label>
+                </div>
+                <div class="controls">
+                    <label for="charCountInput">จำนวนตัวอักษรรวมช่องว่างที่ต้องการสุ่ม:</label>
+                    <input type="number" id="charCountInput" min="1" value="20" oninput="setDefaultValue(event)">
+                    <button id="generateButton" onclick="generateRandom()" >สุ่ม</button>
+                    <button id="copyButton" onclick="copyTextarea()" disabled>คัดลอก</button>
+                    <button id="clearText" onclick="clearTextarea()">ล้าง</button>
+                </div>
+
+                <textarea id="textArea" placeholder="กรุณาใส่ข้อความที่นี่..." oninput="toggleCopyButton()"></textarea>
+
+                <div class="results">
+                <p><strong>จำนวนตัวอักษร:</strong> <span id="charCount">-</span> </p>
+                <p><strong>จำนวนช่องว่าง:</strong> <span id="spaceCount">-</span></p>
+                <p><strong>รวมทั้งหมด:</strong> <span id="totalCount">-</span></p>
+                </div>
+                <h3>คัดลอกข้อความตามจำนวน</h3>
+                <div class="controls">
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="10"></i> 10 <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="50"></i> 50 <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="100"></i> 100 <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="255"></i> 255 <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="500"></i> 500 <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key=">10"></i> >10 <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key=">50"></i> >50 <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key=">100"></i> >100 <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key=">255"></i> >255 <i class="fas fa-copy"></i></button>
+                </div>
+                <h3>คัดลอกข้อความตามรูปแบบ</h3>
+                <div class="controls">
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="th"></i> TH <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="en"></i> EN <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="number"></i> Number <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="special"></i> Special <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="numberTHEN"></i> Number+TH/EN <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="specialTHEN"></i> Special+TH/EN <i class="fas fa-copy"></i></button>
+                    <button id="buttoncopyfixtext"  class="copyButton" data-key="space"></i> Space <i class="fas fa-copy"></i></button>
+                </div>
+                </div>
+                <div class="message" id="copyMessage"></div>
+                <script src="files/text.js"></script>
+            </div>
+            <div id="date" class="tab-content">
+                <h1>คำนวณ</h1>
+                        <div class="calculator-section">
+                        <h3>คำนวณวันเกิดจากอายุ</h3>
+                        <div class="yearconvert">
+                            <form id="ageForm">
+                                <label for="years">ปี:</label>
+                                <input type="number" id="inputyears" placeholder="ปี" name="years" min="0" max="100" required>
+                                <br>
+                                <label for="months">เดือน:</label>
+                                <input type="number" id="inputmonths" placeholder="เดือน" name="months" min="0" max="11" required>
+                                <br>
+                                <label for="days">วัน:</label>
+                                <input type="number" id="inputdays" placeholder="วัน" name="days" min="0" max="30" required>
+                            </form>
+                            <p id="resultyear"></p>
+                        </div>    
+                        </div>
+                        <div class="calculator-section">       
+                        <h3>แปลงวันและเวลา</h3>
+                        <label class="custom-radio"><input type="radio" name="timeFormat"  value="format1" checked> รูปแบบ 1<span class="radio-checkmark"></span></label>
+                        <label class="custom-radio"><input type="radio" name="timeFormat" value="format2"> รูปแบบ 2 <span class="radio-checkmark"></span></label>
+                        <label class="custom-radio"><input type="radio" name="timeFormat" value="format3"> รูปแบบ 3 <span class="radio-checkmark"></span></label>
+                        <br>
+                        <div class="input-wrapper">
+                        <input class="clear-input" type="text" id="timeInput" placeholder="YYYYMMDDHHMMSS (14 หลัก)"  maxlength="14">
+                        <button class="clear-input-button" id="clearvalue" type="clearButton">×</button>
+                        <p id="resultconvertdate"></p>
+                        <input type="hidden" id="hiddenDateInput">
+                        </div>
+                        </div>  
+                        <div class="calculator-section">     
+                        <h3>คำนวณ BMI</h3>
+                        <div class="bmiconvert">
+                            <form id="bmiForm">
+                                <label>น้ำหนัก (กก.) :</label>
+                                <input type="text" id="inputweight" placeholder="ระบุน้ำหนัก" required oninput="validateInputbmi(this); calculateBMI();">
+                                <label>ส่วนสูง (ซม.) :</label>
+                                <input type="text" id="inputheight" placeholder="ระบุส่วนสูง" required oninput="validateInputbmi(this); calculateBMI();">
+                                <br>
+                
+                            </form>
+                            <p id="resultbmi"></p>
+                            
+                        </div>       
+                        </div>  
+                        
+                        
+                        </div>
+                <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+                <script src="files/datetime.js"></script>    
+            </div>
+            <div id="convert" class="tab-content">
+                <h1>แปลงค่า</h1>
+                <form id="containerradiocard">
+                    <label class="card">
+                        <input type="radio" name="conversionType" value="jwtToJson" checked onchange="updatePlaceholders()">
+                        <span class="radio-checkmark"><i class="fas fa-code"></i></span>
+                        <span class="card-title">Token To Json</span>
+                    </label>
+                    
+                    <label class="card">
+                        <input type="radio" name="conversionType" value="jsonToJwt" onchange="updatePlaceholders()">
+                        <span class="radio-checkmark"><i class="fas fa-exchange-alt"></i></span>
+                        <span class="card-title">Json To Token</span>
+                    </label>
+                    
+                    <label class="card">
+                        <input type="radio" name="conversionType" value="compareJson" onchange="updatePlaceholders()">
+                        <span class="radio-checkmark"><i class="fas fa-balance-scale"></i></span>
+                        <span class="card-title">Compare JSON</span>
+                    </label>
+                    
+                    <label class="card">
+                        <input type="radio" name="conversionType" value="64toimg" onchange="updatePlaceholders()">
+                        <span class="radio-checkmark"><i class="fas fa-image"></i></span>
+                        <span class="card-title">Convert Img</span>
+                    </label>
+                    
+                    <label class="card">
+                        <input type="radio" name="conversionType" value="hextofile" onchange="updatePlaceholders()">
+                        <span class="radio-checkmark"><i class="fas fa-file-export"></i></span>
+                        <span class="card-title">Convert Files</span>
+                    </label>
+                </form>
+                        
+                        <textarea id="jwtInput" placeholder="Paste your Token here..."></textarea>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+                        <button id="outputTypebin" onclick="convertToFile('binary'); return false;">Convert to Binary</button>
+                        <button id="outputTypepdf" onclick="convertToFile('pdf'); return false;">Convert to PDF</button>
+                        <button id="outputTypeexcel" onclick="convertToFile('excel'); return false;">Convert to Excel</button>
+                        <button type="button" id="convertButton"  onclick="convert()">Convert</button>
+                        <textarea id="jsonOutput"  placeholder="Converted JSON will appear here..." ></textarea>
+                        <!-- แสดงผลลัพธ์ความแตกต่าง -->
+                        <div id="comparisonResult" style="display: none; white-space: pre-wrap; border: 1px solid #ddd; padding: 10px; margin-top: 10px; font-family: monospace;"></div>
+                        <div id="imageContainer" style="display: none;"></div>
+                        <div id="fileInfo" style="display: none;"></div>
+                        
+
+                        <!-- ปุ่มย้อนกลับ -->
+                        <button type="button" id="backButton" onclick="goBack()" style="display: none;">Back</button>
+                    </form>
+            <script src="files/convert.js"></script>    
+            </div>
+        </div>
+        <script src="files/scripts.js"></script>
+    </section>
+
+    <section id="convert">
+        
+    </section>
+
+    <section id="about">
+        <h1>About</h1>
+        <p>This is the about page content.</p>
+    </section>
+
+
+</body>
+</html>
